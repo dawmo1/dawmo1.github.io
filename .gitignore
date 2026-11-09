@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+*.blend1
+models/import_to_studio/
+assets/roblox_upload/pbr/
+# working files: turntable source frames (the GIFs are kept) and older review rounds
+assets/renders/_tt_*/
+review/*
+!review/studio/

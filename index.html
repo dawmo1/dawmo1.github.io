@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BizarreWasTaken · Roblox Developer</title>
+<meta name="description" content="Full-stack Roblox developer: game UI, VFX, sound, realistic 3D models and Luau, shown running in Roblox Studio.">
+<meta property="og:title" content="BizarreWasTaken · Roblox Developer">
+<meta property="og:description" content="Game UI, VFX, sound, 3D models and Luau, shown running in Roblox Studio.">
+<meta property="og:image" content="review/studio/vfx_portal.jpg">
+<meta name="theme-color" content="#0b0c10">
+<style>
+:root {
+  --bg: #0b0c10; --surface: #15171d; --surface-2: #1d2028;
+  --text: #f5f5f7; --muted: #a1a1a6; --accent: #5af0ff; --accent-ink: #04161a;
+  --radius: 22px; --radius-sm: 14px; --gutter: max(16px, env(safe-area-inset-left));
+  --ease-press: cubic-bezier(.2,.8,.2,1);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 100%/1.5 system-ui, -apple-system, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+code { font: .9em ui-monospace, "SF Mono", Menlo, monospace; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ---------- translucent nav: content scrolls under it ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(11,12,16,.62);
+  -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%);
+}
+/* scroll-edge fade instead of a hard divider */
+.nav::after { content: ""; position: absolute; inset: 100% 0 auto; height: 18px; pointer-events: none;
+  background: linear-gradient(rgba(11,12,16,.5), transparent); }
+.nav .wrap { display: flex; align-items: center; gap: 12px; height: 56px; }
+.brand { font-weight: 650; letter-spacing: -.01em; text-decoration: none; white-space: nowrap; }
+.links { position: relative; display: flex; gap: 2px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+.links::-webkit-scrollbar { display: none; }
+.links a {
+  position: relative; z-index: 1; padding: 6px 12px; border-radius: 999px; text-decoration: none;
+  font-size: .9375rem; color: var(--muted); white-space: nowrap; transition: color .2s;
+}
+.links a[aria-current="true"] { color: var(--text); }
+.links .pill { position: absolute; z-index: 0; top: 0; left: 0; height: 100%; border-radius: 999px;
+  background: rgba(255,255,255,.1); width: 0; will-change: transform, width; }
+
+/* ---------- type: tracking and leading change with size ---------- */
+.eyebrow { font-size: .8125rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); line-height: 1.02; letter-spacing: -.035em; font-weight: 700; margin: 0 0 18px; max-width: 13ch; }
+h2 { font-size: clamp(1.9rem, 4.4vw, 3rem); line-height: 1.06; letter-spacing: -.028em; font-weight: 700; margin: 0 0 12px; }
+h3 { font-size: 1.25rem; line-height: 1.2; letter-spacing: -.015em; margin: 36px 0 14px; font-weight: 650; }
+.lead { font-size: clamp(1.0625rem, 1.6vw, 1.25rem); line-height: 1.5; color: var(--muted); max-width: 60ch; margin: 0 0 26px; letter-spacing: -.003em; }
+
+/* ---------- buttons: feedback on press, instantly ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: 999px;
+  font: inherit; font-weight: 600; font-size: 1rem; text-decoration: none; border: 0; cursor: pointer;
+  background: var(--surface-2); color: var(--text); transition: transform .1s var(--ease-press), background .2s;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+}
+.btn:hover { background: #262a34; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { background: #8af5ff; }
+.btn:active { transform: scale(.97); }
+.cta { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- hero ---------- */
+.hero { padding-block: 64px 28px; }
+.hero-media { margin-top: 44px; display: grid; grid-template-columns: 1.6fr 1fr; gap: 14px; }
+.hero-media .stack { display: grid; gap: 14px; }
+@media (max-width: 760px) { .hero-media { grid-template-columns: 1fr; } }
+
+/* ---------- sections + galleries ---------- */
+section { padding-block: 88px 8px; scroll-margin-top: 56px; }
+.row-head { display: flex; align-items: end; gap: 16px; }
+.row-head .arrows { margin-left: auto; display: flex; gap: 8px; margin-bottom: 14px; }
+.arrows button { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--surface-2); color: var(--text);
+  font-size: 18px; cursor: pointer; transition: transform .1s var(--ease-press), opacity .2s; }
+.arrows button:active { transform: scale(.92); }
+.arrows button:disabled { opacity: .3; cursor: default; }
+@media (hover: none) { .arrows { display: none !important; } }
+.rail {
+  display: grid; grid-auto-flow: column; grid-auto-columns: clamp(260px, 44vw, 560px); gap: 14px;
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter);
+  padding: 4px var(--gutter) 18px; margin: 0 calc(-1 * var(--gutter)); scrollbar-width: none;
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail.sq { grid-auto-columns: clamp(200px, 28vw, 300px); }
+.card {
+  scroll-snap-align: start; margin: 0; background: var(--surface); border-radius: var(--radius); overflow: hidden;
+  cursor: zoom-in; transition: transform .1s var(--ease-press); -webkit-tap-highlight-color: transparent;
+  border: 0; padding: 0; color: inherit; font: inherit; text-align: left; display: block; width: 100%;
+}
+.card:active { transform: scale(.975); }
+.card .media { display: block; aspect-ratio: 16 / 9; background: #0f1015; overflow: hidden; }
+.card.square .media { aspect-ratio: 1; }
+.card img { width: 100%; height: 100%; object-fit: cover; }
+.card.square img { object-fit: contain; }
+.card .cap { display: block; padding: 12px 16px 14px; }
+.card .cap b { display: block; font-weight: 600; font-size: 1rem; letter-spacing: -.01em; }
+.card .cap span { display: block; color: var(--muted); font-size: .875rem; margin-top: 2px; }
+.hero-media .card { height: 100%; }
+.hero-media .card .media { aspect-ratio: 16 / 9; height: 100%; }
+
+/* ---------- sound ---------- */
+.sounds { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+.sound {
+  display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 14px; border: 0; border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text); font: inherit; text-align: left; cursor: pointer;
+  transition: transform .1s var(--ease-press), background .2s; -webkit-tap-highlight-color: transparent;
+}
+.sound:hover { background: var(--surface-2); }
+.sound:active { transform: scale(.97); }
+.sound .dot { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: var(--accent-ink);
+  display: grid; place-items: center; font-size: 14px; }
+.sound.playing .dot { animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse { 50% { transform: scale(.88); } }
+.sound b { display: block; font-weight: 600; }
+.sound small { color: var(--muted); font-size: .8125rem; }
+
+/* ---------- code ---------- */
+pre { margin: 0; padding: 20px; border-radius: var(--radius); background: #0f1015; overflow-x: auto;
+  font: .875rem/1.65 ui-monospace, "SF Mono", Menlo, monospace; color: #d8dbe2; }
+pre .c { color: #6c7280; } pre .k { color: #ff7ab2; } pre .f { color: #5af0ff; } pre .s { color: #fc6a5d; }
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 12px; }
+.file { display: block; padding: 14px 16px; border-radius: var(--radius-sm); background: var(--surface); text-decoration: none;
+  transition: transform .1s var(--ease-press), background .2s; }
+.file:hover { background: var(--surface-2); } .file:active { transform: scale(.97); }
+.file b { font: 600 .9375rem ui-monospace, "SF Mono", Menlo, monospace; }
+.file span { display: block; color: var(--muted); font-size: .875rem; margin-top: 2px; }
+
+/* ---------- hire ---------- */
+.boards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+.board { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px; border-radius: var(--radius-sm);
+  background: var(--surface); text-decoration: none; font-weight: 600; transition: transform .1s var(--ease-press), background .2s; }
+.board:hover { background: var(--surface-2); } .board:active { transform: scale(.97); }
+.board small { font-weight: 500; font-size: .8125rem; color: var(--muted); }
+footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: var(--muted); font-size: .875rem; }
+
+/* ---------- lightbox: dim to focus ---------- */
+.lb { position: fixed; inset: 0; z-index: 50; touch-action: none; }
+.lb[hidden] { display: none; }
+.lb-scrim { position: absolute; inset: 0; background: #000; opacity: 0; }
+.lb-img { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; border-radius: 12px;
+  cursor: grab; user-select: none; -webkit-user-drag: none; object-fit: contain; }
+.lb-img.dragging { cursor: grabbing; }
+.lb-bar { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px var(--gutter) calc(18px + env(safe-area-inset-bottom));
+  display: flex; align-items: center; gap: 12px; opacity: 0; }
+.lb-bar .t b { display: block; font-weight: 600; } .lb-bar .t span { color: var(--muted); font-size: .875rem; }
+.lb-bar .nav-btns { margin-left: auto; display: flex; gap: 8px; }
+.lb-close { position: absolute; top: calc(14px + env(safe-area-inset-top)); right: 14px; opacity: 0; }
+.lb .round { width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer; color: var(--text); font-size: 18px;
+  background: rgba(40,42,50,.7); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  transition: transform .1s var(--ease-press); }
+.lb .round:active { transform: scale(.92); }
+
+@media (prefers-reduced-transparency: reduce) {
+  .nav { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .lb .round { background: #2a2c34; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (prefers-contrast: more) { .card, .sound, .file, .board { outline: 1px solid rgba(255,255,255,.35); } }
+@media (prefers-reduced-motion: reduce) {
+  .btn, .card, .sound, .file, .board, .arrows button { transition: none; }
+  .btn:active, .card:active, .sound:active, .file:active, .board:active { transform: none; }
+  .sound.playing .dot { animation: none; }
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">BizarreWasTaken</a>
+    <nav class="links" aria-label="Sections">
+      <span class="pill" aria-hidden="true"></span>
+      <a href="#interface">Interface</a><a href="#vfx">VFX</a><a href="#models">Models</a><a href="#sound">Sound</a><a href="#code">Code</a><a href="#hire">Hire</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap hero">
+  <p class="eyebrow">Full-stack Roblox developer</p>
+  <h1>UI, VFX, sound, models and Luau.</h1>
+  <p class="lead">Everything here was made for this portfolio. The UI, abilities and models are shown running in Roblox Studio, with no store packs or sample libraries.</p>
+  <div class="cta">
+    <a class="btn primary" href="#hire">Work with me</a>
+    <a class="btn" href="showcase/vfx-sfx.html">Play every effect and sound</a>
+  </div>
+  <div class="hero-media">
+    <button class="card" data-src="review/studio/vfx_portal.jpg" data-title="Portal" data-sub="Ability VFX in Roblox Studio"><span class="media"><img src="review/studio/vfx_portal.jpg" alt="Swirling purple portal ability running in Roblox Studio" fetchpriority="high"></span></button>
+    <div class="stack">
+      <button class="card" data-src="assets/renders/carbine_hero.png" data-title="M7 carbine" data-sub="18k tris · baked PBR"><span class="media"><img src="site/img/carbine_hero.jpg" alt="Realistic carbine render with tan furniture and heat-tinted muzzle"></span></button>
+      <button class="card" data-src="review/studio/ui_eggshop.jpg" data-title="Egg shop" data-sub="Game UI built in Studio"><span class="media"><img src="review/studio/ui_eggshop.jpg" alt="Egg shop screen built in Roblox Studio"></span></button>
+    </div>
+  </div>
+</div>
+
+<section id="interface" class="wrap">
+  <p class="eyebrow">Interface</p>
+  <div class="row-head"><h2>Game UI, built in Studio</h2><div class="arrows" data-for="rail-ui"><button aria-label="Previous">‹</button><button aria-label="Next">›</button></div></div>
+  <p class="lead">Styles players already know: pet sim, tycoon, anime battler, tower defense. Each is a real ScreenGui built from one shared UIKit module, scaled to fit any screen.</p>
+  <div class="rail" id="rail-ui">
+    <button class="card" data-src="review/studio/ui_eggshop.jpg" data-title="Egg shop" data-sub="Hatch odds · gamepass upsell"><span class="media"><img loading="lazy" src="review/studio/ui_eggshop.jpg" alt="Egg shop UI"></span><span class="cap"><b>Egg shop</b><span>Hatch odds · gamepass upsell</span></span></button>
+    <button class="card" data-src="review/studio/ui_battle.jpg" data-title="Battle HUD" data-sub="Boss bar · damage numbers · hotbar"><span class="media"><img loading="lazy" src="review/studio/ui_battle.jpg" alt="Anime battler HUD"></span><span class="cap"><b>Battle HUD</b><span>Boss bar · damage numbers · hotbar</span></span></button>
+    <button class="card" data-src="review/studio/ui_tycoon.jpg" data-title="Tycoon HUD" data-sub="Cash · upgrade card · rebirth"><span class="media"><img loading="lazy" src="review/studio/ui_tycoon.jpg" alt="Tycoon HUD"></span><span class="cap"><b>Tycoon HUD</b><span>Cash · upgrade card · rebirth</span></span></button>
+    <button class="card" data-src="review/studio/ui_towerdefense.jpg" data-title="Tower defense HUD" data-sub="Wave · tower stats · targeting"><span class="media"><img loading="lazy" src="review/studio/ui_towerdefense.jpg" alt="Tower defense HUD"></span><span class="cap"><b>Tower defense HUD</b><span>Wave · tower stats · targeting</span></span></button>
+    <button class="card" data-src="site/img/design_Summon.jpg" data-title="Summon banner" data-sub="Mockup"><span class="media"><img loading="lazy" src="site/img/design_Summon.jpg" alt="Summon banner mockup"></span><span class="cap"><b>Summon banner</b><span>Mockup</span></span></button>
+    <button class="card" data-src="site/img/design_Inventory.jpg" data-title="Inventory" data-sub="Mockup"><span class="media"><img loading="lazy" src="site/img/design_Inventory.jpg" alt="Inventory mockup"></span><span class="cap"><b>Inventory</b><span>Mockup</span></span></button>
+    <button class="card" data-src="site/img/design_Garage.jpg" data-title="Garage" data-sub="Mockup"><span class="media"><img loading="lazy" src="site/img/design_Garage.jpg" alt="Garage mockup"></span><span class="cap"><b>Garage</b><span>Mockup</span></span></button>
+    <button class="card" data-src="site/img/design_Horror.jpg" data-title="Horror HUD" data-sub="Mockup"><span class="media"><img loading="lazy" src="site/img/design_Horror.jpg" alt="Horror HUD mockup"></span><span class="cap"><b>Horror HUD</b><span>Mockup</span></span></button>
+  </div>
+</section>
+
+<section id="vfx" class="wrap">
+  <p class="eyebrow">VFX</p>
+  <div class="row-head"><h2>Layered abilities</h2><div class="arrows" data-for="rail-vfx"><button aria-label="Previous">‹</button><button aria-label="Next">›</button></div></div>
+  <p class="lead">Each ability stacks a flash, flipbooks, a shockwave, sparks, smoke, light, camera shake and debris, and runs from one line of code. Every texture is generated, so any effect can be re-timed or recoloured.</p>
+  <div class="rail" id="rail-vfx">
+    <button class="card" data-src="review/studio/vfx_portal.jpg" data-title="Portal" data-sub="Swirl · dark core · ground glow"><span class="media"><img loading="lazy" src="review/studio/vfx_portal.jpg" alt="Portal ability"></span><span class="cap"><b>Portal</b><span>Swirl · dark core · ground glow</span></span></button>
+    <button class="card" data-src="review/studio/vfx_lightning.jpg" data-title="Lightning strike" data-sub="Bolt · shockwave · ground crack"><span class="media"><img loading="lazy" src="review/studio/vfx_lightning.jpg" alt="Lightning strike ability"></span><span class="cap"><b>Lightning strike</b><span>Bolt · shockwave · ground crack</span></span></button>
+    <button class="card" data-src="review/studio/vfx_fireball.jpg" data-title="Fireball" data-sub="Flame trail · impact burst"><span class="media"><img loading="lazy" src="review/studio/vfx_fireball.jpg" alt="Fireball ability"></span><span class="cap"><b>Fireball</b><span>Flame trail · impact burst</span></span></button>
+    <button class="card" data-src="review/studio/vfx_slam.jpg" data-title="Ground slam" data-sub="Ring · crack · debris"><span class="media"><img loading="lazy" src="review/studio/vfx_slam.jpg" alt="Ground slam ability"></span><span class="cap"><b>Ground slam</b><span>Ring · crack · debris</span></span></button>
+    <button class="card" data-src="review/studio/vfx_charge.jpg" data-title="Charge burst" data-sub="Core · inward sparks"><span class="media"><img loading="lazy" src="review/studio/vfx_charge.jpg" alt="Charge burst ability"></span><span class="cap"><b>Charge burst</b><span>Core · inward sparks</span></span></button>
+    <button class="card" data-src="review/studio/vfx_dash.jpg" data-title="Dash slash" data-sub="Slash arc · streaks · trail"><span class="media"><img loading="lazy" src="review/studio/vfx_dash.jpg" alt="Dash slash ability"></span><span class="cap"><b>Dash slash</b><span>Slash arc · streaks · trail</span></span></button>
+  </div>
+  <h3>Flipbooks</h3>
+  <div class="rail sq">
+    <button class="card square" data-src="vfx/previews/portal_swirl.gif" data-title="Portal swirl" data-sub="4×4 flipbook"><span class="media"><img loading="lazy" src="vfx/previews/portal_swirl.gif" alt="Portal swirl flipbook"></span><span class="cap"><b>Portal swirl</b></span></button>
+    <button class="card square" data-src="vfx/previews/lightning_bolt.gif" data-title="Lightning bolt" data-sub="4×4 flipbook"><span class="media"><img loading="lazy" src="vfx/previews/lightning_bolt.gif" alt="Lightning bolt flipbook"></span><span class="cap"><b>Lightning bolt</b></span></button>
+    <button class="card square" data-src="vfx/previews/fire_burst.gif" data-title="Fire burst" data-sub="4×4 flipbook"><span class="media"><img loading="lazy" src="vfx/previews/fire_burst.gif" alt="Fire burst flipbook"></span><span class="cap"><b>Fire burst</b></span></button>
+    <button class="card square" data-src="vfx/previews/slash_arc.gif" data-title="Slash arc" data-sub="4×4 flipbook"><span class="media"><img loading="lazy" src="vfx/previews/slash_arc.gif" alt="Slash arc flipbook"></span><span class="cap"><b>Slash arc</b></span></button>
+    <button class="card square" data-src="vfx/previews/charge_gather.gif" data-title="Charge gather" data-sub="4×4 flipbook"><span class="media"><img loading="lazy" src="vfx/previews/charge_gather.gif" alt="Charge gather flipbook"></span><span class="cap"><b>Charge gather</b></span></button>
+  </div>
+</section>
+
+<section id="models" class="wrap">
+  <p class="eyebrow">3D</p>
+  <div class="row-head"><h2>Realistic models, game-ready</h2><div class="arrows" data-for="rail-models"><button aria-label="Previous">‹</button><button aria-label="Next">›</button></div></div>
+  <p class="lead">Built in Blender at real-world scale. Each ships as one MeshPart under 20k triangles with baked colour, metal, roughness and normal maps for SurfaceAppearance.</p>
+  <div class="rail" id="rail-models">
+    <button class="card" data-src="assets/renders/carbine_hero.png" data-title="M7 carbine" data-sub="18k tris · etched markings · heat-tinted brake"><span class="media"><img loading="lazy" src="site/img/carbine_hero.jpg" alt="Carbine with tan furniture and red controls"></span><span class="cap"><b>M7 carbine</b><span>18k tris · etched markings</span></span></button>
+    <button class="card" data-src="assets/renders/carbine_detail.png" data-title="Carbine receiver" data-sub="Satin anodizing · edge wear · stipple"><span class="media"><img loading="lazy" src="site/img/carbine_detail.jpg" alt="Close-up of the carbine receiver"></span><span class="cap"><b>Receiver close-up</b><span>Satin anodizing · edge wear</span></span></button>
+    <button class="card" data-src="assets/renders/greatsword_hero.png" data-title="Emberbrand greatsword" data-sub="11k tris · pattern-welded steel · ember inlay"><span class="media"><img loading="lazy" src="site/img/greatsword_hero.jpg" alt="Longsword with ember inlay and gold guard"></span><span class="cap"><b>Emberbrand greatsword</b><span>11k tris · ember inlay</span></span></button>
+    <button class="card" data-src="assets/renders/greatsword_detail.png" data-title="Greatsword hilt" data-sub="Fuller · honed edge · leather wrap"><span class="media"><img loading="lazy" src="site/img/greatsword_detail.jpg" alt="Close-up of the greatsword hilt"></span><span class="cap"><b>Hilt close-up</b><span>Fuller · honed edge · wrap</span></span></button>
+    <button class="card" data-src="assets/renders/kart_hero.png" data-title="Racing kart" data-sub="17k tris · tube chassis · slick tyres"><span class="media"><img loading="lazy" src="site/img/kart_hero.jpg" alt="Racing go-kart with yellow bodywork"></span><span class="cap"><b>Racing kart</b><span>17k tris · tube chassis</span></span></button>
+    <button class="card" data-src="assets/renders/kart_detail.png" data-title="Kart engine" data-sub="Cooling fins · chain drive · heat tint"><span class="media"><img loading="lazy" src="site/img/kart_detail.jpg" alt="Close-up of the kart engine"></span><span class="cap"><b>Engine close-up</b><span>Fins · chain drive · heat tint</span></span></button>
+    <button class="card" data-src="assets/renders/chest_open_hero.png" data-title="Loot chest, open" data-sub="17.5k tris · oak · velvet · gold hoard"><span class="media"><img loading="lazy" src="site/img/chest_open_hero.jpg" alt="Open treasure chest full of gold"></span><span class="cap"><b>Loot chest, open</b><span>Oak · velvet · gold hoard</span></span></button>
+    <button class="card" data-src="assets/renders/chest_closed_hero.png" data-title="Loot chest, closed" data-sub="10k tris · iron straps · brass"><span class="media"><img loading="lazy" src="site/img/chest_closed_hero.jpg" alt="Closed treasure chest"></span><span class="cap"><b>Loot chest, closed</b><span>Iron straps · brass</span></span></button>
+    <button class="card" data-src="assets/renders/blaster_hero.png" data-title="VOLT-9 blaster" data-sub="16k tris · energy cell · copper coils"><span class="media"><img loading="lazy" src="site/img/blaster_hero.jpg" alt="Sci-fi energy rifle"></span><span class="cap"><b>VOLT-9 blaster</b><span>Energy cell · copper coils</span></span></button>
+    <button class="card" data-src="assets/renders/blaster_detail.png" data-title="Blaster close-up" data-sub="Glass cell · panel seams · neon"><span class="media"><img loading="lazy" src="site/img/blaster_detail.jpg" alt="Close-up of the blaster"></span><span class="cap"><b>Blaster close-up</b><span>Glass cell · panel seams</span></span></button>
+  </div>
+  <h3>Running in Roblox Studio</h3>
+  <div class="rail">
+    <button class="card" data-src="review/studio/pbr_carbine.jpg" data-title="Carbine in Studio" data-sub="SurfaceAppearance PBR"><span class="media"><img loading="lazy" src="review/studio/pbr_carbine.jpg" alt="Carbine imported into Roblox Studio"></span><span class="cap"><b>Carbine</b><span>SurfaceAppearance PBR</span></span></button>
+    <button class="card" data-src="review/studio/pbr_greatsword.jpg" data-title="Greatsword in Studio" data-sub="Neon ember strips"><span class="media"><img loading="lazy" src="review/studio/pbr_greatsword.jpg" alt="Greatsword imported into Roblox Studio"></span><span class="cap"><b>Greatsword</b><span>Neon ember strips</span></span></button>
+    <button class="card" data-src="review/studio/pbr_blaster.jpg" data-title="Blaster in Studio" data-sub="Neon glow mesh"><span class="media"><img loading="lazy" src="review/studio/pbr_blaster.jpg" alt="Blaster imported into Roblox Studio"></span><span class="cap"><b>Blaster</b><span>Neon glow mesh</span></span></button>
+    <button class="card" data-src="review/studio/pbr_chests.jpg" data-title="Chests in Studio" data-sub="Closed and open"><span class="media"><img loading="lazy" src="review/studio/pbr_chests.jpg" alt="Both chests imported into Roblox Studio"></span><span class="cap"><b>Loot chests</b><span>Closed and open</span></span></button>
+    <button class="card" data-src="review/studio/pbr_kart.jpg" data-title="Kart in Studio" data-sub="6.3 studs long"><span class="media"><img loading="lazy" src="review/studio/pbr_kart.jpg" alt="Kart imported into Roblox Studio"></span><span class="cap"><b>Kart</b><span>6.3 studs long</span></span></button>
+  </div>
+  <h3>Stylized pets, eggs and avatars</h3>
+  <div class="rail sq">
+    <button class="card square" data-src="site/img/pets_group.jpg" data-title="Pets" data-sub="Stylized"><span class="media"><img loading="lazy" src="site/img/pets_group.jpg" alt="Stylized pet renders"></span><span class="cap"><b>Pets</b></span></button>
+    <button class="card square" data-src="site/img/eggs_group.jpg" data-title="Eggs" data-sub="Stylized"><span class="media"><img loading="lazy" src="site/img/eggs_group.jpg" alt="Stylized egg renders"></span><span class="cap"><b>Eggs</b></span></button>
+    <button class="card square" data-src="site/img/avatar_kaiyo.jpg" data-title="Avatar" data-sub="R15 rig"><span class="media"><img loading="lazy" src="site/img/avatar_kaiyo.jpg" alt="Stylized R15 avatar render"></span><span class="cap"><b>Avatar</b></span></button>
+    <button class="card square" data-src="site/img/scale_lineup.jpg" data-title="Scale check" data-sub="Every model next to an R15 rig"><span class="media"><img loading="lazy" src="site/img/scale_lineup.jpg" alt="Models lined up next to an R15 character"></span><span class="cap"><b>Scale check</b></span></button>
+  </div>
+</section>
+
+<section id="sound" class="wrap">
+  <p class="eyebrow">Sound</p>
+  <h2>Original SFX, mixed for Roblox</h2>
+  <p class="lead">Made from scratch with filters and envelopes, levels set per sound, and three takes for anything that repeats. Press a ×3 sound again to hear the next take.</p>
+  <div class="sounds" id="sounds"></div>
+  <p style="margin-top:16px"><a class="btn" href="showcase/vfx-sfx.html#sounds">All 28 sounds</a></p>
+</section>
+
+<section id="code" class="wrap">
+  <p class="eyebrow">Luau + tools</p>
+  <h2>Code a team can call in one line</h2>
+  <p class="lead">Typed (<code>--!strict</code>) ModuleScripts with usage notes at the top, plus the Python tools that generate the textures, icons and sounds above.</p>
+<pre><span class="c">-- client: play an ability where the server says it hit</span>
+<span class="k">local</span> VFX = <span class="f">require</span>(ReplicatedStorage.ActionVFX)
+<span class="k">local</span> SFX = <span class="f">require</span>(ReplicatedStorage.SFXPresets)
+
+Remotes.Ability.OnClientEvent:<span class="f">Connect</span>(<span class="k">function</span>(kind, pos)
+	<span class="k">if</span> kind == <span class="s">"Lightning"</span> <span class="k">then</span>
+		VFX.<span class="f">LightningStrike</span>(pos)
+		SFX.<span class="f">playAt</span>(<span class="s">"lightning_strike"</span>, pos)
+	<span class="k">end</span>
+<span class="k">end</span>)</pre>
+  <div class="files">
+    <a class="file" href="vfx/roblox/ActionVFX.lua"><b>ActionVFX.lua</b><span>6 abilities, emitter builder, camera shake</span></a>
+    <a class="file" href="ui/roblox/UIKit.lua"><b>UIKit.lua</b><span>Panels, stroked text, juicy buttons</span></a>
+    <a class="file" href="sfx/SFXPresets.lua"><b>SFXPresets.lua</b><span>Mixing buses, random takes, 3D sound</span></a>
+    <a class="file" href="models/roblox/ApplyPBR.lua"><b>ApplyPBR.lua</b><span>Wires imported meshes to PBR maps</span></a>
+    <a class="file" href="tools/make_vfx.py"><b>tools/</b><span>Texture, icon and SFX generators</span></a>
+  </div>
+</section>
+
+<section id="hire" class="wrap">
+  <p class="eyebrow">Hire</p>
+  <h2>Work with me</h2>
+  <p class="lead">Robux or USD (PayPal), per task or per project. DM for rates. Each board below has the post I use for that Discord channel.</p>
+  <div class="cta" style="margin-bottom:26px">
+    <button class="btn primary" type="button" id="copy-discord">Discord: ktfp <span aria-hidden="true">· copy</span></button>
+    <a class="btn" href="https://www.roblox.com/users/profile?username=BizarreWasTaken" target="_blank" rel="noopener">Roblox: BizarreWasTaken</a>
+  </div>
+  <div class="boards">
+    <a class="board" href="boards/interface-hiring/">Interface <small>UI design + build</small></a>
+    <a class="board" href="boards/vfx-hiring/">VFX <small>Abilities, hits</small></a>
+    <a class="board" href="boards/modeler-hiring/">Modeler <small>Realistic + stylized</small></a>
+    <a class="board" href="boards/sound-hiring/">Sound <small>Original SFX</small></a>
+    <a class="board" href="boards/graphics-hiring/">Graphics <small>Icons, renders</small></a>
+    <a class="board" href="boards/scripter-hiring/">Scripter <small>Luau modules</small></a>
+    <a class="board" href="boards/programmer-hiring/">Programmer <small>Luau + tooling</small></a>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">Every texture, icon, sound and model here was made for this portfolio. Source: <a href="https://github.com/dawmo1/roblox-portfolio">github.com/dawmo1/roblox-portfolio</a>.</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+  <div class="lb-scrim"></div>
+  <img class="lb-img" alt="" draggable="false">
+  <button class="round lb-close" aria-label="Close">✕</button>
+  <div class="lb-bar"><div class="t"><b></b><span></span></div>
+    <div class="nav-btns"><button class="round" data-step="-1" aria-label="Previous image">‹</button><button class="round" data-step="1" aria-label="Next image">›</button></div></div>
+</div>
+
+<script>
+'use strict';
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+/* Spring with Apple's designer parameters (damping ratio + response, in seconds).
+   It always continues from its current value and velocity, so any animation can be
+   grabbed or re-targeted mid-flight without a jump. */
+class Spring {
+  constructor(value, { damping = 1, response = 0.35 } = {}) {
+    this.value = value; this.target = value; this.velocity = 0; this.set(damping, response);
+  }
+  set(damping, response) { this.k = (2 * Math.PI / response) ** 2; this.c = 4 * Math.PI * damping / response; return this; }
+  to(target, velocity) { this.target = target; if (velocity !== undefined) this.velocity = velocity; loop.add(this); return this; }
+  jump(v) { this.value = this.target = v; this.velocity = 0; loop.delete(this); }
+  step(dt) {
+    const n = Math.max(1, Math.ceil(dt / 0.004)), h = dt / n;   // substeps keep stiff springs stable
+    for (let i = 0; i < n; i++) {
+      const a = -this.k * (this.value - this.target) - this.c * this.velocity;
+      this.velocity += a * h; this.value += this.velocity * h;
+    }
+    return Math.abs(this.value - this.target) < 0.005 && Math.abs(this.velocity) < 0.02;
+  }
+}
+const loop = (() => {
+  const live = new Set(), subs = new Set(); let last = 0, raf = 0, watchdog = 0;
+  // rAF is the display-synced clock; the watchdog keeps springs moving if a frame never arrives
+  // (a page that isn't being painted yet), instead of leaving the loop stuck waiting forever
+  const schedule = () => {
+    raf = requestAnimationFrame(tick); clearTimeout(watchdog);
+    watchdog = setTimeout(() => { if (raf) { cancelAnimationFrame(raf); tick(performance.now()); } }, 100);
+  };
+  const tick = (t) => {
+    const dt = Math.min(Math.max((t - last) / 1000, 0) || 1 / 60, 1 / 30); last = t;
+    for (const s of live) if (s.step(dt)) { s.value = s.target; s.velocity = 0; live.delete(s); }
+    raf = 0; if (live.size) schedule(); else clearTimeout(watchdog);
+    subs.forEach(f => f(!raf));
+  };
+  return {
+    add(s) { live.add(s); if (!raf) { last = performance.now(); schedule(); } },
+    delete(s) { live.delete(s); },
+    on(f) { subs.add(f); },
+  };
+})();
+// Apple's momentum projection (exponential decay, as used for scroll deceleration)
+const project = (v, d = 0.998) => (v / 1000) * d / (1 - d);
+// progressive resistance past a boundary instead of a hard stop
+const rubber = (x, dim, c = 0.55) => (x * dim * c) / (dim + c * Math.abs(x));
+
+/* ---------- nav pill that springs to the section you're reading ---------- */
+(() => {
+  const links = [...document.querySelectorAll('.links a')], pill = document.querySelector('.links .pill');
+  const px = new Spring(0), pw = new Spring(0);
+  let shown = false;
+  const paint = () => { pill.style.transform = `translateX(${px.value}px)`; pill.style.width = `${Math.max(0, pw.value)}px`; };
+  loop.on(paint);
+  const activate = (id) => {
+    links.forEach(a => a.setAttribute('aria-current', a.hash === '#' + id ? 'true' : 'false'));
+    const a = links.find(l => l.hash === '#' + id);
+    if (!a) { shown && !reduceMotion.matches ? pw.to(0) : pw.jump(0); paint(); return; }
+    if (!shown || reduceMotion.matches) { px.jump(a.offsetLeft); pw.jump(a.offsetWidth); shown = true; paint(); return; }
+    px.to(a.offsetLeft); pw.to(a.offsetWidth);
+  };
+  const sections = [...document.querySelectorAll('main section[id]')];
+  const pick = () => {
+    const line = innerHeight * 0.35; let cur = null;
+    for (const s of sections) if (s.getBoundingClientRect().top <= line) cur = s.id;
+    activate(cur);
+  };
+  addEventListener('scroll', pick, { passive: true }); addEventListener('resize', pick); pick();
+})();
+
+/* ---------- gallery arrows (native scrolling keeps real momentum and snapping) ---------- */
+document.querySelectorAll('.arrows').forEach(box => {
+  const rail = document.getElementById(box.dataset.for), [prev, next] = box.querySelectorAll('button');
+  const sync = () => { prev.disabled = rail.scrollLeft < 4; next.disabled = rail.scrollLeft + rail.clientWidth > rail.scrollWidth - 4; };
+  const page = (dir) => rail.scrollBy({ left: dir * rail.clientWidth * 0.85, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+  prev.onclick = () => page(-1); next.onclick = () => page(1);
+  rail.addEventListener('scroll', sync, { passive: true }); addEventListener('resize', sync); sync();
+});
+
+/* ---------- lightbox: opens from its card, returns to it, drag to dismiss ---------- */
+(() => {
+  const lb = document.getElementById('lb'), img = lb.querySelector('.lb-img'), scrim = lb.querySelector('.lb-scrim');
+  const bar = lb.querySelector('.lb-bar'), closeBtn = lb.querySelector('.lb-close');
+  const title = bar.querySelector('b'), sub = bar.querySelector('.t span');
+  const cards = [...document.querySelectorAll('.card[data-src]')];
+  // independent springs per axis, plus scale and presence (scrim + chrome)
+  const X = new Spring(0, { response: 0.38 }), Y = new Spring(0, { response: 0.38 });
+  const S = new Spring(1, { response: 0.38 }), P = new Spring(0, { response: 0.3 });
+  let card = null, final = null, closing = false, lastFocus = null;
+
+  const fitRect = (nw, nh) => {
+    const pad = innerWidth < 700 ? 12 : 48, barH = 84;
+    const maxW = innerWidth - pad * 2, maxH = innerHeight - pad - barH - 20;
+    const s = Math.min(maxW / nw, maxH / nh, 1.6), w = nw * s, h = nh * s;
+    return { x: (innerWidth - w) / 2, y: Math.max(pad, (innerHeight - barH - h) / 2), w, h };
+  };
+  // the card's on-screen image as an offset + scale of the final rect (the FLIP "first" frame)
+  const originOf = (c) => {
+    const r = c.querySelector('img').getBoundingClientRect();
+    const s = Math.max(r.width / final.w, r.height / final.h);
+    return { x: r.left + r.width / 2 - (final.x + final.w * s / 2), y: r.top + r.height / 2 - (final.y + final.h * s / 2), s };
+  };
+  const render = () => {
+    if (!final) return;
+    img.style.transform = `translate(${final.x + X.value}px, ${final.y + Y.value}px) scale(${S.value})`;
+    scrim.style.opacity = Math.max(0, 0.86 * P.value).toFixed(3);
+    const ui = Math.max(0, Math.min(1, (P.value - 0.6) / 0.4)).toFixed(3);
+    bar.style.opacity = ui; closeBtn.style.opacity = ui;
+  };
+  loop.on((idle) => { render(); if (idle && closing) finishClose(); });
+
+  const setContent = (c) => { title.textContent = c.dataset.title || ''; sub.textContent = c.dataset.sub || ''; img.alt = c.querySelector('img').alt; };
+  const size = (c) => { const t = c.querySelector('img'); final = fitRect(t.naturalWidth || 1600, t.naturalHeight || 900); img.style.width = final.w + 'px'; img.style.height = final.h + 'px'; };
+  const upgrade = (c) => {   // swap in the full-resolution file once decoded, without moving anything
+    const thumb = c.querySelector('img');
+    if (!c.dataset.src || c.dataset.src === thumb.getAttribute('src')) return;
+    const hi = new Image(); hi.src = c.dataset.src;
+    hi.decode().then(() => { if (card === c) img.src = hi.src; }).catch(() => {});
+  };
+
+  function open(c) {
+    if (card && !closing) return;
+    if (closing && card === c) {   // reopening mid-close: re-target from where it is now
+      closing = false; c.style.visibility = 'hidden';
+      X.to(0); Y.to(0); S.to(1); P.to(1); return;
+    }
+    if (closing) finishClose();
+    card = c; closing = false; lastFocus = document.activeElement; setContent(c);
+    const thumb = c.querySelector('img'); img.src = thumb.currentSrc || thumb.src;   // instant: start from the image already on screen
+    size(c); upgrade(c);
+    lb.hidden = false; document.body.style.overflow = 'hidden';
+    const o = originOf(c); X.jump(o.x); Y.jump(o.y); S.jump(o.s); P.jump(0); render();
+    c.style.visibility = 'hidden';
+    if (reduceMotion.matches) { X.jump(0); Y.jump(0); S.jump(1); P.jump(1); render(); }
+    else { X.to(0); Y.to(0); S.to(1); P.to(1); }
+    closeBtn.focus({ preventScroll: true });
+  }
+  function close(vx, vy) {
+    if (!card || closing) return;
+    closing = true;
+    if (reduceMotion.matches) { finishClose(); return; }
+    const o = originOf(card);   // leave along the path it arrived on
+    X.to(o.x, vx); Y.to(o.y, vy); S.to(o.s); P.to(0);
+  }
+  function finishClose() {
+    if (!card) return;
+    [X, Y, S, P].forEach(s => loop.delete(s));
+    card.style.visibility = ''; lb.hidden = true; document.body.style.overflow = '';
+    closing = false; const back = lastFocus; card = null; final = null;
+    if (back) back.focus({ preventScroll: true });
+  }
+  function step(dir) {
+    if (!card || closing) return;
+    const c = cards[(cards.indexOf(card) + dir + cards.length) % cards.length];
+    card.style.visibility = ''; card = c; c.style.visibility = 'hidden'; setContent(c);
+    c.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    const thumb = c.querySelector('img');
+    const swap = () => {
+      img.src = thumb.currentSrc || thumb.src; size(c); upgrade(c);
+      if (reduceMotion.matches) { X.jump(0); render(); } else { X.jump(dir * 60); X.to(0); }
+    };
+    if (thumb.complete && thumb.naturalWidth) swap();
+    else { thumb.loading = 'eager'; thumb.addEventListener('load', swap, { once: true }); }
+  }
+
+  cards.forEach(c => c.addEventListener('click', () => open(c)));
+  scrim.addEventListener('click', () => close());
+  closeBtn.addEventListener('click', () => close());
+  bar.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => step(+b.dataset.step)));
+  addEventListener('keydown', (e) => {
+    if (!card || closing) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') step(1);
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'Tab') {   // keep focus inside the viewer
+      const f = [closeBtn, ...bar.querySelectorAll('button')], i = f.indexOf(document.activeElement);
+      e.preventDefault(); f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+    }
+  });
+  addEventListener('resize', () => { if (card && !closing) { size(card); render(); } });
+
+  // drag to dismiss: 1:1 tracking from wherever it's grabbed (even mid-animation),
+  // rubber-band upward, then project the flick's momentum to decide close vs. return
+  let drag = null;
+  img.addEventListener('pointerdown', (e) => {
+    if (!card || e.button > 0) return;
+    if (closing) { closing = false; card.style.visibility = 'hidden'; }   // catching a closing image keeps it open
+    try { img.setPointerCapture(e.pointerId); } catch {}   // keeps tracking when the pointer leaves the image
+    img.classList.add('dragging');
+    [X, Y, S, P].forEach(s => loop.delete(s));                           // hold the presentation value
+    drag = { id: e.pointerId, ox: e.clientX - X.value, oy: e.clientY - Y.value, x0: e.clientX, y0: e.clientY,
+             hist: [{ x: e.clientX, y: e.clientY, t: e.timeStamp }], moved: false };
+  });
+  img.addEventListener('pointermove', (e) => {
+    if (!drag || e.pointerId !== drag.id) return;
+    if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 8) return;   // small hysteresis
+    drag.moved = true;
+    let dx = e.clientX - drag.ox, dy = e.clientY - drag.oy;
+    if (dy < 0) dy = rubber(dy, innerHeight);
+    dx = rubber(dx, innerWidth, 0.35);
+    X.value = X.target = dx; Y.value = Y.target = dy;
+    const pull = Math.min(1, Math.max(0, dy) / (innerHeight * 0.6));
+    S.value = S.target = 1 - pull * 0.25; P.value = P.target = 1 - pull * 0.9;
+    render();
+    drag.hist.push({ x: e.clientX, y: e.clientY, t: e.timeStamp }); if (drag.hist.length > 6) drag.hist.shift();
+  });
+  const release = (e) => {
+    if (!drag || e.pointerId !== drag.id) return;
+    img.classList.remove('dragging');
+    const h = drag.hist, a = h[0], b = h[h.length - 1], dt = Math.max(16, b.t - a.t) / 1000;
+    const vx = (b.x - a.x) / dt, vy = (b.y - a.y) / dt;   // px/s at release
+    const moved = drag.moved; drag = null;
+    if (!moved) { X.to(0); Y.to(0); S.to(1); P.to(1); return; }
+    if (Y.value + project(vy) > innerHeight * 0.22) close(vx, vy);   // where the flick is heading, not where it let go
+    else {   // a little bounce, earned by the flick
+      X.set(0.8, 0.35).to(0, vx); Y.set(0.8, 0.35).to(0, vy); S.to(1); P.to(1);
+      setTimeout(() => { X.set(1, 0.38); Y.set(1, 0.38); }, 600);
+    }
+  };
+  img.addEventListener('pointerup', release); img.addEventListener('pointercancel', release);
+})();
+
+/* ---------- sound highlights with round-robin takes ---------- */
+(() => {
+  const SOUNDS = [['lightning_strike', 1, 'Ability'], ['fire_explosion', 1, 'Ability'], ['portal_open', 1, 'Ability'], ['charge_release', 1, 'Ability'],
+    ['slash_heavy', 3, 'Combat'], ['impact_heavy', 3, 'Combat'], ['egg_hatch', 1, 'Reward'], ['coin_pickup', 3, 'Reward']];
+  const wrap = document.getElementById('sounds'); let current = null, currentBtn = null;
+  for (const [name, takes, kind] of SOUNDS) {
+    const label = name.replace(/_/g, ' '), files = takes === 1 ? [name] : [1, 2, 3].map(i => `${name}_${i}`);
+    let audios = null, take = 0;
+    const btn = document.createElement('button'); btn.className = 'sound'; btn.type = 'button'; btn.setAttribute('aria-label', 'Play ' + label);
+    btn.innerHTML = '<span class="dot" aria-hidden="true">▶</span><span><b></b><small></small></span>';
+    btn.querySelector('b').textContent = label + (takes > 1 ? '  ×3' : ''); btn.querySelector('small').textContent = kind;
+    const play = () => {
+      audios ??= files.map(f => new Audio(`sfx/ogg/${f}.ogg`));
+      if (current) { current.pause(); current.currentTime = 0; currentBtn?.classList.remove('playing'); }
+      current = audios[take++ % audios.length]; currentBtn = btn; btn.classList.add('playing');
+      current.onended = () => btn.classList.remove('playing');
+      current.play().catch(() => btn.classList.remove('playing'));
+    };
+    btn.addEventListener('pointerdown', (e) => { if (e.button === 0) play(); });   // sound on press, not on release
+    btn.addEventListener('click', (e) => { if (e.detail === 0) play(); });          // keyboard activation
+    wrap.append(btn);
+  }
+})();
+
+/* ---------- copy Discord handle ---------- */
+(() => {
+  const b = document.getElementById('copy-discord'), hint = b.querySelector('span');
+  b.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('ktfp'); hint.textContent = '· copied'; }
+    catch { hint.textContent = '· ktfp'; }
+    setTimeout(() => { hint.textContent = '· copy'; }, 1600);
+  });
+})();
+</script>
+</body>
+</html>

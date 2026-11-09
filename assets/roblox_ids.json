@@ -1,0 +1,93 @@
+{
+  "vfx": {
+    "SlashArc": "rbxassetid://86129308012184",
+    "HitSpark": "rbxassetid://119631336650897",
+    "EmberFire": "rbxassetid://123238074413869",
+    "HatchFlash": "rbxassetid://122805611612984",
+    "Shockwave": "rbxassetid://72311840515392",
+    "Sparkle": "rbxassetid://98239994939869",
+    "SmokePuff": "rbxassetid://76838484093424",
+    "Lightning": "rbxassetid://139735096555350",
+    "FireBurst": "rbxassetid://106936772842122",
+    "SpeedLines": "rbxassetid://102528327473182",
+    "ChargeGather": "rbxassetid://97480718788903",
+    "PortalSwirl": "rbxassetid://132926981391130",
+    "ImpactStar": "rbxassetid://118208055226281",
+    "BeamEnergy": "rbxassetid://89494262872232",
+    "Glow": "rbxassetid://124463122880813",
+    "GroundCrack": "rbxassetid://93912127860447",
+    "Trail": "rbxassetid://98959886869117"
+  },
+  "ui": {
+    "heart": "rbxassetid://115505062976013",
+    "gem": "rbxassetid://134951790169084",
+    "egg_grass": "rbxassetid://92441927604380",
+    "head_red": "rbxassetid://107323497919211",
+    "cash": "rbxassetid://80572717018336",
+    "avatar_kaiyo": "rbxassetid://138220555157971",
+    "coin": "rbxassetid://72930248697588",
+    "head_kaiyo": "rbxassetid://133745327321297",
+    "gift": "rbxassetid://71208848680824",
+    "chest_hero": "rbxassetid://125269597224216",
+    "egg_void": "rbxassetid://110976766365481",
+    "blaster_ui": "rbxassetid://133021929788484",
+    "head_wren": "rbxassetid://77604366341633",
+    "egg_frost": "rbxassetid://130798992144703",
+    "egg_inferno": "rbxassetid://98523933885533",
+    "lock": "rbxassetid://132183212338860",
+    "plus": "rbxassetid://139131640399061",
+    "ability_charge": "rbxassetid://113533532118932",
+    "shield": "rbxassetid://87903716926063",
+    "ability_lightning": "rbxassetid://122524622680560",
+    "pet_slime": "rbxassetid://94583254512105",
+    "wave": "rbxassetid://90674144631908",
+    "star": "rbxassetid://115610420202137",
+    "ability_portal": "rbxassetid://88739813248237",
+    "ability_impact": "rbxassetid://119701617904196",
+    "pet_emberfox": "rbxassetid://78786581577109",
+    "sword_ui": "rbxassetid://102855746544454",
+    "ability_fire": "rbxassetid://138158465217106",
+    "pet_blockpup": "rbxassetid://112435948109069",
+    "ability_slash": "rbxassetid://125544322705284",
+    "skull": "rbxassetid://75782050076632",
+    "sword": "rbxassetid://93436515502911"
+  },
+  "pbr": {
+    "carbine": {
+      "ColorMap": "rbxassetid://110246233540403",
+      "MetalnessMap": "rbxassetid://107372105022928",
+      "RoughnessMap": "rbxassetid://86685406982632",
+      "NormalMap": "rbxassetid://83695781571102"
+    },
+    "greatsword": {
+      "ColorMap": "rbxassetid://130681486908570",
+      "MetalnessMap": "rbxassetid://120695032209634",
+      "RoughnessMap": "rbxassetid://122865995225366",
+      "NormalMap": "rbxassetid://71502732184799"
+    },
+    "kart": {
+      "ColorMap": "rbxassetid://75828342641082",
+      "MetalnessMap": "rbxassetid://127216182911336",
+      "RoughnessMap": "rbxassetid://134478021078012",
+      "NormalMap": "rbxassetid://82828179793389"
+    },
+    "chest": {
+      "ColorMap": "rbxassetid://129724414442978",
+      "MetalnessMap": "rbxassetid://106807358691911",
+      "RoughnessMap": "rbxassetid://85394708061436",
+      "NormalMap": "rbxassetid://130488555019520"
+    },
+    "chest_open": {
+      "ColorMap": "rbxassetid://85747514015872",
+      "MetalnessMap": "rbxassetid://76993933811455",
+      "RoughnessMap": "rbxassetid://77088260130462",
+      "NormalMap": "rbxassetid://124991827383100"
+    },
+    "blaster": {
+      "ColorMap": "rbxassetid://92531055544504",
+      "MetalnessMap": "rbxassetid://98308464361013",
+      "RoughnessMap": "rbxassetid://112371272998447",
+      "NormalMap": "rbxassetid://110533712724700"
+    }
+  }
+}

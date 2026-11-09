@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VFX and SFX</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1C1F27;--panel:#252933;--line:#343947;--text:#F2F4F8;--muted:#AEB6C6;--accent:#5AF0FF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Space Grotesk',system-ui,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:48px 16px 80px}
+h1{font-size:44px;margin:0 0 6px}
+h2{font-size:26px;margin:56px 0 6px}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);letter-spacing:.04em}
+p.lead{color:var(--muted);font-size:17px;max-width:760px;line-height:1.55}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.card img{display:block;width:100%;aspect-ratio:1;object-fit:contain;background:#14161C}
+figure.card{margin:0}
+.grid.wide{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+figure.card img{aspect-ratio:2/1;object-fit:cover}
+.card .meta{padding:12px 14px}
+.card .name{font-weight:700;font-size:17px}
+.card .spec{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-top:4px}
+.sheets{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:16px}
+.sheets img{width:100%;aspect-ratio:1;background:#000;border-radius:10px;border:1px solid var(--line)}
+.sound{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.sound button{width:44px;height:44px;border-radius:50%;border:0;background:var(--accent);color:#0B0E14;font-weight:700;cursor:pointer;flex:none}
+.sound button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.sound .name{font-weight:700}
+.sound .spec{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.sounds{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:20px}
+code{font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--panel);padding:2px 6px;border-radius:6px}
+</style>
+</head>
+<body>
+<main>
+<div class="kicker">ROBLOX PORTFOLIO · VFX + SFX</div>
+<h1>Effects and sound</h1>
+<p class="lead">Thirteen flipbook effects built for Roblox ParticleEmitters, six layered abilities running in Studio, and thirty-four original sound effects with round-robin variations, mixed onto four SoundGroup buses. All assets are made in-house and ship with full rights. Textures are white so the emitter's Color tints them; <code>VFXPresets.lua</code>, <code>ActionVFX.lua</code> and <code>SFXPresets.lua</code> drop them into a game.</p>
+
+<h2>VFX</h2>
+<div class="kicker">4×4 FLIPBOOKS · 1024 PX · GRID4x4 LAYOUT</div>
+<div class="grid">
+<div class="card"><img src="../vfx/previews/slash_arc.gif" alt="Slash arc effect, looping preview"><div class="meta"><div class="name">Slash arc</div><div class="spec">One-shot · 0.3 s · faces forward · sword swings</div></div></div>
+<div class="card"><img src="../vfx/previews/hit_spark.gif" alt="Hit spark effect, looping preview"><div class="meta"><div class="name">Hit spark</div><div class="spec">One-shot · 0.25 s · impacts</div></div></div>
+<div class="card"><img src="../vfx/previews/ember_fire.gif" alt="Ember fire effect, looping preview"><div class="meta"><div class="name">Ember fire</div><div class="spec">Loop · 24 fps · torches, auras</div></div></div>
+<div class="card"><img src="../vfx/previews/hatch_flash.gif" alt="Hatch flash effect, looping preview"><div class="meta"><div class="name">Hatch flash</div><div class="spec">One-shot · 0.55 s · egg reveal</div></div></div>
+<div class="card"><img src="../vfx/previews/shockwave.gif" alt="Shockwave effect, looping preview"><div class="meta"><div class="name">Shockwave</div><div class="spec">One-shot · 0.45 s · lies flat · ground slams</div></div></div>
+<div class="card"><img src="../vfx/previews/sparkle.gif" alt="Sparkle effect, looping preview"><div class="meta"><div class="name">Sparkle</div><div class="spec">Loop · 6/s · rare items, coins</div></div></div>
+<div class="card"><img src="../vfx/previews/smoke_puff.gif" alt="Smoke puff effect, looping preview"><div class="meta"><div class="name">Smoke puff</div><div class="spec">One-shot × 6 · 1 s · landings, dust</div></div></div>
+<div class="card"><img src="../vfx/previews/lightning_bolt.gif" alt="Lightning bolt effect, looping preview"><div class="meta"><div class="name">Lightning bolt</div><div class="spec">Re-strikes every 4 frames · 30 fps · strikes</div></div></div>
+<div class="card"><img src="../vfx/previews/fire_burst.gif" alt="Fire burst effect, looping preview"><div class="meta"><div class="name">Fire burst</div><div class="spec">One-shot · 0.6 s · explosions, fireball trail</div></div></div>
+<div class="card"><img src="../vfx/previews/speed_lines.gif" alt="Speed lines effect, looping preview"><div class="meta"><div class="name">Speed lines</div><div class="spec">Loop · dashes, sprint</div></div></div>
+<div class="card"><img src="../vfx/previews/charge_gather.gif" alt="Charge gather effect, looping preview"><div class="meta"><div class="name">Charge gather</div><div class="spec">Loop · inward pull · charge-ups</div></div></div>
+<div class="card"><img src="../vfx/previews/portal_swirl.gif" alt="Portal swirl effect, looping preview"><div class="meta"><div class="name">Portal swirl</div><div class="spec">Loop · rotate with RotSpeed · portals, summons</div></div></div>
+<div class="card"><img src="../vfx/previews/impact_star.gif" alt="Impact star effect, looping preview"><div class="meta"><div class="name">Impact star</div><div class="spec">One-shot · 0.25 s · heavy hits</div></div></div>
+</div>
+<h2>Abilities in Roblox Studio</h2>
+<div class="kicker">ACTIONVFX.LUA · 6 LAYERED ABILITIES · EACH SHOT ISOLATED, NO POST</div>
+<div class="grid wide">
+<figure class="card"><img src="../review/studio/vfx_fireball.jpg" alt="Fireball ability running in Roblox Studio"><div class="meta"><div class="name">Fireball</div><div class="spec">Orb + flame trail + smoke · impact burst</div></div></figure>
+<figure class="card"><img src="../review/studio/vfx_lightning.jpg" alt="Lightning strike ability running in Roblox Studio"><div class="meta"><div class="name">Lightning strike</div><div class="spec">Bolt · shockwave · sparks · ground crack</div></div></figure>
+<figure class="card"><img src="../review/studio/vfx_dash.jpg" alt="Dash slash ability running in Roblox Studio"><div class="meta"><div class="name">Dash slash</div><div class="spec">Slash arc · streaks · beam trail · dust</div></div></figure>
+<figure class="card"><img src="../review/studio/vfx_slam.jpg" alt="Ground slam ability running in Roblox Studio"><div class="meta"><div class="name">Ground slam</div><div class="spec">Shockwave · crack decal · debris · dust ring</div></div></figure>
+<figure class="card"><img src="../review/studio/vfx_charge.jpg" alt="Charge burst ability running in Roblox Studio"><div class="meta"><div class="name">Charge burst</div><div class="spec">Glow core · inward sparks · shrinking ring</div></div></figure>
+<figure class="card"><img src="../review/studio/vfx_portal.jpg" alt="Portal ability running in Roblox Studio"><div class="meta"><div class="name">Portal</div><div class="spec">Rotating swirl · dark core · ground glow</div></div></figure>
+</div>
+
+<h2>Texture sheets</h2>
+<div class="kicker">WHAT GETS UPLOADED · WHITE + ALPHA</div>
+<div class="sheets">
+<img src="../vfx/sheets/slash_arc_4x4.png" alt="Slash arc flipbook sheet">
+<img src="../vfx/sheets/hit_spark_4x4.png" alt="Hit spark flipbook sheet">
+<img src="../vfx/sheets/ember_fire_4x4.png" alt="Ember fire flipbook sheet">
+<img src="../vfx/sheets/hatch_flash_4x4.png" alt="Hatch flash flipbook sheet">
+<img src="../vfx/sheets/shockwave_4x4.png" alt="Shockwave flipbook sheet">
+<img src="../vfx/sheets/sparkle_4x4.png" alt="Sparkle flipbook sheet">
+<img src="../vfx/sheets/smoke_puff_4x4.png" alt="Smoke puff flipbook sheet">
+<img src="../vfx/textures/beam_energy_tile.png" alt="Tileable energy beam texture" style="aspect-ratio:4/1">
+</div>
+
+<h2>SFX</h2>
+<div class="kicker">OGG · 44.1 KHZ · BUSES: UI, SFX, VEHICLE, AMBIENCE · ×3 = ROUND-ROBIN TAKES, PRESS AGAIN TO HEAR THE NEXT</div>
+<div class="sounds" id="sounds"></div>
+</main>
+<script>
+const SOUNDS = [
+  ['ui_click', 1, 'UI · 0.06 s'], ['ui_hover', 1, 'UI · 0.09 s'], ['ui_denied', 1, 'UI · 0.3 s'], ['notification_pop', 1, 'UI · 0.18 s'],
+  ['coin_pickup', 3, 'SFX · 0.5 s'], ['reward_jingle', 1, 'SFX · 1.3 s'], ['egg_crack', 3, 'SFX · 0.55 s'], ['egg_hatch', 1, 'SFX · 1.6 s'],
+  ['blaster_shot', 3, 'SFX · 0.24 s'], ['sword_swing', 3, 'SFX · 0.3–0.36 s'], ['sword_hit', 3, 'SFX · 0.3 s'], ['explosion', 1, 'SFX · 1.6 s'],
+  ['footstep_stone', 3, 'SFX · 0.14 s'], ['footstep_grass', 3, 'SFX · 0.2 s'], ['jump', 1, 'SFX · 0.22 s'],
+  ['kart_engine_loop', 1, 'Vehicle · 2 s seamless loop'], ['door_knock', 1, 'Ambience · 1.4 s'],
+  ['fireball_cast', 1, 'Ability · 0.9 s'], ['fire_explosion', 1, 'Ability · 1.65 s'], ['lightning_charge', 1, 'Ability · 0.95 s'], ['lightning_strike', 1, 'Ability · 2.75 s'],
+  ['dash_whoosh', 3, 'Ability · 0.6 s'], ['slash_heavy', 3, 'Ability · 0.8 s'], ['ground_slam', 1, 'Ability · 1.95 s'], ['charge_up', 1, 'Ability · 1.5 s'],
+  ['charge_release', 1, 'Ability · 1.45 s'], ['portal_open', 1, 'Ability · 1.95 s'], ['impact_heavy', 3, 'Ability · 1.05 s'],
+];
+const wrap = document.getElementById('sounds');
+let current = null;
+for (const [name, takes, spec] of SOUNDS) {
+  const row = document.createElement('div'); row.className = 'sound';
+  const btn = document.createElement('button'); btn.textContent = '▶'; btn.setAttribute('aria-label', 'Play ' + name.replace(/_/g, ' '));
+  const files = takes === 1 ? [name] : [1, 2, 3].map(i => name + '_' + i);
+  const audios = files.map(f => { const a = new Audio('../sfx/ogg/' + f + '.ogg'); a.loop = name.endsWith('_loop'); return a; });
+  let take = 0;
+  btn.addEventListener('click', () => {
+    const playing = audios.find(a => !a.paused);
+    if (playing && name.endsWith('_loop')) { playing.pause(); btn.textContent = '▶'; return; }
+    if (current) { current.pause(); current.currentTime = 0; }
+    const a = audios[take % audios.length]; take++;
+    a.currentTime = 0; a.play(); current = a; btn.textContent = name.endsWith('_loop') ? '■' : '▶';
+  });
+  const text = document.createElement('div');
+  text.innerHTML = '<div class="name"></div><div class="spec"></div>';
+  text.querySelector('.name').textContent = name.replace(/_/g, ' ') + (takes > 1 ? '  ×' + takes : '');
+  text.querySelector('.spec').textContent = spec;
+  row.append(btn, text); wrap.append(row);
+}
+</script>
+</body>
+</html>

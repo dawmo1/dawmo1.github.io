@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Volt blaster model sheet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#8FE3FF}a:hover{color:#FFFFFF}
+</style>
+</helmet>
+<div style="width: 1280px; height: 800px; position: relative; overflow: hidden; background: linear-gradient(180deg, #3C4250 0%, #2A2E38 100%); font-family: 'Space Grotesk', sans-serif; color: #F2F4F8; display: grid; grid-template-columns: 720px minmax(0, 1fr)">
+<div style="position: relative">
+<div style="position: absolute; left: 36px; top: 30px; display: flex; flex-direction: column; gap: 4px; z-index: 1">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #AEB6C6">MODEL 03 · WEAPON · BLENDER → ROBLOX</span>
+<span style="font-weight: 700; font-size: 40px; line-height: 1.05">Volt Blaster Mk II</span>
+</div>
+<img src="IMG_blaster_hero" alt="Volt Blaster, three-quarter view" style="position: absolute; left: 30px; top: 70px; width: 660px; height: 600px; object-fit: contain; -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%)">
+<div style="position: absolute; left: 36px; bottom: 30px; display: flex; gap: 10px">
+<sc-for list="{{tags}}" as="t" hint-placeholder-count="3"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18)">{{t}}</span></sc-for>
+</div>
+</div>
+<div style="background: rgba(10, 12, 18, 0.35); border-left: 1px solid rgba(255,255,255,0.08); padding: 28px 30px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{views}}" as="v" hint-placeholder-count="3">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 6px">
+<div style="aspect-ratio: 1; border-radius: 10px; background: #F2F1EC; display: flex; align-items: center; justify-content: center; overflow: hidden"><sc-if value="{{v.is_blaster_front}}" hint-placeholder-val="{{ false }}"><img src="IMG_blaster_front" alt="{{v.label}} view" style="width: 94%; height: 94%; object-fit: contain"></sc-if><sc-if value="{{v.is_blaster_top}}" hint-placeholder-val="{{ false }}"><img src="IMG_blaster_top" alt="{{v.label}} view" style="width: 94%; height: 94%; object-fit: contain"></sc-if><sc-if value="{{v.is_scale_blaster}}" hint-placeholder-val="{{ false }}"><img src="IMG_scale_blaster" alt="{{v.label}} view" style="width: 94%; height: 94%; object-fit: contain"></sc-if></div>
+<figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #AEB6C6">{{v.label}}</figcaption>
+</figure>
+</sc-for>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #D5DAE4">Rifle-sized for an R15 two-hand hold (4.3 × 1.6 × 0.45 studs). Shown in the default Roblox tool hold. Stepped receiver with lighter side panels, edge highlights and L-shaped inlays, top rail with sights, an energy cell sunk into a cradle, tapered shroud with recessed vents, hooked three-prong emitter, magazine with a charge window, finger-grooved grip, looped trigger guard and a C-frame stock with a rubber pad.</p>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{palette}}" as="c" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 4px"><div style="height: 34px; border-radius: 6px; background: {{c.hex}}; border: 2px solid #15151A"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px">{{c.hex}}</span><span style="font-size: 12px; color: #AEB6C6">{{c.mat}}</span></div>
+</sc-for>
+</div>
+<table style="border-collapse: collapse; font-size: 13px; width: 100%">
+<thead><tr style="text-align: left; border-bottom: 1px solid rgba(255,255,255,0.3)"><th style="padding: 5px 4px">Part</th><th style="padding: 5px 4px">Shape</th><th style="padding: 5px 4px">Size (studs)</th></tr></thead>
+<tbody>
+<sc-for list="{{parts}}" as="p" hint-placeholder-count="6">
+<tr style="border-bottom: 1px solid rgba(255,255,255,0.08)"><td style="padding: 5px 4px; font-weight: 700">{{p.n}}</td><td style="padding: 5px 4px; color: #D5DAE4">{{p.s}}</td><td style="padding: 5px 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px">{{p.d}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+tags: ['1,476 tris', 'R15 scale', 'Muzzle attachment'],
+views: [{ img: 'IMG_blaster_front', is_blaster_front: true, label: 'SIDE' }, { img: 'IMG_blaster_top', is_blaster_top: true, label: 'TOP' }, { img: 'IMG_scale_blaster', is_scale_blaster: true, label: 'HELD BY R15' }],
+palette: [{ hex: '#1A1F2A', mat: 'Body' }, { hex: '#3A4458', mat: 'Panels, grip' }, { hex: '#5A6478', mat: 'Shroud, metal' }, { hex: '#22E6FF', mat: 'Cell, neon' }, { hex: '#FF2E88', mat: 'Inlays, neon' }],
+parts: [
+{ n: 'Receiver', s: 'Stepped profile, 2-segment bevel', d: '2.2 × 0.55 × 0.4' },
+{ n: 'Rail + sights', s: '7-tooth rail, hooded front post', d: '0.75 long' },
+{ n: 'Energy cell', s: 'Sunk in a cradle, metal caps', d: 'r 0.14 × 0.62' },
+{ n: 'Shroud', s: 'Tapered octagon, 3 vents', d: 'r 0.18 → 0.14 × 0.8' },
+{ n: 'Emitter', s: 'Glowing core, 3 prongs', d: 'r 0.2' },
+{ n: 'Stock', s: 'Tapered C-frame, lightening hole, pad', d: '1.0 × 0.62 × 0.34' }
+]
+};;
+}
+}
+</script>
+</body>
+</html>

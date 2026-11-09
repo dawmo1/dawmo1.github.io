@@ -1,0 +1,31 @@
+# Peak level (dBFS) each sound is mixed to in the exported .ogg files.
+# WAV masters in sfx/wav are all -1 dBFS; this table is the game mix. Variations (_1.._3) share their base level.
+ui_hover -18
+ui_click -12
+ui_denied -14
+notification_pop -10
+footstep_stone -14
+footstep_grass -14
+jump -10
+coin_pickup -7
+egg_crack -6
+sword_swing -6
+kart_engine_loop -9
+reward_jingle -4
+egg_hatch -3
+blaster_shot -4
+door_knock -3
+sword_hit -2
+explosion -1
+# action / ability set
+fireball_cast -5
+fire_explosion -1
+lightning_charge -8
+lightning_strike -1
+dash_whoosh -6
+slash_heavy -4
+ground_slam -1
+charge_up -6
+charge_release -2
+portal_open -5
+impact_heavy -2

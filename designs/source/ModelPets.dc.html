@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pets and eggs model sheet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#8FE3FF}a:hover{color:#FFFFFF}
+</style>
+</helmet>
+<div style="width: 1280px; height: 800px; position: relative; overflow: hidden; background: linear-gradient(180deg, #3C4250 0%, #2A2E38 100%); font-family: 'Space Grotesk', sans-serif; color: #F2F4F8; display: grid; grid-template-columns: 720px minmax(0, 1fr)">
+<div style="position: relative">
+<div style="position: absolute; left: 36px; top: 30px; display: flex; flex-direction: column; gap: 4px; z-index: 1">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #AEB6C6">MODEL 05 · SIMULATOR SET · BLENDER → ROBLOX</span>
+<span style="font-weight: 700; font-size: 40px; line-height: 1.05">Pets and Hatch Eggs</span>
+</div>
+<img src="IMG_pets_group" alt="Mochi, Blockpup and Emberfox pets" style="position: absolute; left: 20px; top: 110px; width: 680px; height: 380px; object-fit: contain; -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%)">
+<img src="IMG_eggs_group" alt="Grass, Frost, Inferno and Void eggs" style="position: absolute; left: 20px; top: 470px; width: 680px; height: 240px; object-fit: contain; -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%)">
+<div style="position: absolute; left: 36px; bottom: 30px; display: flex; gap: 10px">
+<sc-for list="{{tags}}" as="t" hint-placeholder-count="3"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18)">{{t}}</span></sc-for>
+</div>
+</div>
+<div style="background: rgba(10, 12, 18, 0.35); border-left: 1px solid rgba(255,255,255,0.08); padding: 28px 30px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{views}}" as="v" hint-placeholder-count="3">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 6px">
+<div style="aspect-ratio: 1; border-radius: 10px; background: #F2F1EC; display: flex; align-items: center; justify-content: center; overflow: hidden"><sc-if value="{{v.is_pet_blockpup}}" hint-placeholder-val="{{ false }}"><img src="IMG_pet_blockpup" alt="{{v.label}}" style="width: 90%; height: 90%; object-fit: contain"></sc-if><sc-if value="{{v.is_pet_emberfox}}" hint-placeholder-val="{{ false }}"><img src="IMG_pet_emberfox" alt="{{v.label}}" style="width: 90%; height: 90%; object-fit: contain"></sc-if><sc-if value="{{v.is_scale_lineup}}" hint-placeholder-val="{{ false }}"><img src="IMG_scale_lineup" alt="{{v.label}}" style="width: 90%; height: 90%; object-fit: contain"></sc-if></div>
+<figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #AEB6C6">{{v.label}}</figcaption>
+</figure>
+</sc-for>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #D5DAE4">Pets sized to follow an R15 character (about knee to waist height). One toy style across rarities: rounded shapes, glossy eyes, blush, one signature detail each (Mochi's sprout, nub arms and base, Blockpup's collar and tag, Emberfox's curled flame tail). Every egg tier has its own silhouette: a leaf crown and collar, ice shards breaking through the shell, glowing cracks with a flame crown, and a void egg with a swirl and orbit ring floating over a plinth.</p>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{palette}}" as="c" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 4px"><div style="height: 34px; border-radius: 6px; background: {{c.hex}}; border: 2px solid #15151A"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px">{{c.hex}}</span><span style="font-size: 12px; color: #AEB6C6">{{c.mat}}</span></div>
+</sc-for>
+</div>
+<table style="border-collapse: collapse; font-size: 13px; width: 100%">
+<thead><tr style="text-align: left; border-bottom: 1px solid rgba(255,255,255,0.3)"><th style="padding: 5px 4px">Asset</th><th style="padding: 5px 4px">Rarity</th><th style="padding: 5px 4px">Tris</th></tr></thead>
+<tbody>
+<sc-for list="{{parts}}" as="p" hint-placeholder-count="5">
+<tr style="border-bottom: 1px solid rgba(255,255,255,0.08)"><td style="padding: 5px 4px; font-weight: 700">{{p.n}}</td><td style="padding: 5px 4px; color: #D5DAE4">{{p.s}}</td><td style="padding: 5px 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px">{{p.d}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+tags: ['3 pets', '4 eggs', 'R15 scale'],
+views: [{ img: 'IMG_pet_blockpup', is_pet_blockpup: true, label: 'BLOCKPUP' }, { img: 'IMG_pet_emberfox', is_pet_emberfox: true, label: 'EMBERFOX' }, { img: 'IMG_scale_lineup', is_scale_lineup: true, label: 'R15 SCALE' }],
+palette: [{ hex: '#6EE07A', mat: 'Mochi' }, { hex: '#E3A86B', mat: 'Blockpup' }, { hex: '#FF7A1A', mat: 'Emberfox' }, { hex: '#FFE27A', mat: 'Flame core' }, { hex: '#B061FF', mat: 'Void egg' }],
+parts: [
+{ n: 'Mochi', s: 'Common', d: '2.6k' },
+{ n: 'Blockpup', s: 'Rare', d: '3.4k' },
+{ n: 'Emberfox', s: 'Legendary', d: '3.8k' },
+{ n: 'Eggs ×4', s: 'Grass → Void', d: '1.6k–4.3k' },
+{ n: 'Export', s: 'Planned as one MeshPart per pet', d: 'FBX' }
+]
+};;
+}
+}
+</script>
+</body>
+</html>

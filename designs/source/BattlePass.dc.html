@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Overdrive season pass</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Inter:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#C43D00}a:hover{color:#111111}
+</style>
+</helmet>
+<div style="width: 1280px; height: 720px; position: relative; overflow: hidden; background: #F2F1EC; font-family: 'Inter', sans-serif; color: #111111; padding: 36px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 26px">
+
+<div style="position: absolute; right: -40px; top: -60px; font-family: 'Archivo Black', sans-serif; font-size: 360px; line-height: 1; color: {{accent}}; opacity: 0.12">04</div>
+
+<div style="display: flex; justify-content: space-between; align-items: flex-end; position: relative">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="font-weight: 700; font-size: 14px; letter-spacing: 4px">SEASON 04 · 23 DAYS LEFT</div>
+<div style="font-family: 'Archivo Black', sans-serif; font-size: 84px; line-height: 0.9; letter-spacing: -2px">OVERDRIVE</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px">
+<div style="display: flex; flex-direction: column; align-items: flex-end">
+<span style="font-weight: 600; font-size: 13px; letter-spacing: 3px">TIER</span>
+<span style="font-family: 'Archivo Black', sans-serif; font-size: 64px; line-height: 0.9">{{tier}}</span>
+</div>
+<button style="min-height: 64px; padding: 0 28px; background: #111111; color: #F2F1EC; border: 0; font-family: 'Archivo Black', sans-serif; font-size: 18px; letter-spacing: 1px; display: flex; align-items: center; gap: 12px">
+UNLOCK PREMIUM
+<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10 H16 M11 5 L16 10 L11 15" stroke="{{accent}}" stroke-width="3" fill="none"></path></svg>
+</button>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px; position: relative">
+<div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 14px"><span>{{xp}} / 1,000 XP</span><span>NEXT: TIER {{nextTier}}</span></div>
+<div style="height: 12px; background: #DAD8D0"><div style="height: 100%; width: {{xpPct}}; background: {{accent}}"></div></div>
+</div>
+
+<div style="display: grid; grid-template-columns: 110px repeat(7, minmax(0, 1fr)); gap: 10px; flex: 1; min-height: 0; position: relative">
+<div></div>
+<sc-for list="{{tiers}}" as="t" hint-placeholder-count="7">
+<div style="font-family: 'Archivo Black', sans-serif; font-size: 22px; padding-bottom: 4px; border-bottom: 4px solid {{t.bar}}; color: {{t.num}}">{{t.n}}</div>
+</sc-for>
+
+<div style="font-weight: 700; font-size: 13px; letter-spacing: 3px; align-self: center">FREE</div>
+<sc-for list="{{tiers}}" as="t" hint-placeholder-count="7">
+<div style="background: #FFFFFF; border: 2px solid #111111; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; opacity: {{t.fade}}">
+<span style="font-weight: 600; font-size: 13px; color: #555555">{{t.freeType}}</span>
+<span style="font-weight: 700; font-size: 16px; line-height: 1.2">{{t.free}}</span>
+<sc-if value="{{t.claimable}}" hint-placeholder-val="{{ false }}"><span style="align-self: flex-start; background: {{accent}}; color: #111111; font-weight: 700; font-size: 12px; padding: 4px 8px">CLAIM</span></sc-if>
+<sc-if value="{{t.claimed}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 20 20" aria-label="Claimed" role="img"><path d="M3 10 L8 15 L17 5" stroke="#111111" stroke-width="3" fill="none"></path></svg></sc-if>
+</div>
+</sc-for>
+
+<div style="font-weight: 700; font-size: 13px; letter-spacing: 3px; align-self: center; color: #C43D00">PREMIUM</div>
+<sc-for list="{{tiers}}" as="t" hint-placeholder-count="7">
+<div style="background: #111111; color: #F2F1EC; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; position: relative; opacity: {{t.fade}}">
+<span style="font-weight: 600; font-size: 13px; color: #A8A69E">{{t.premType}}</span>
+<span style="font-weight: 700; font-size: 16px; line-height: 1.2">{{t.prem}}</span>
+<svg width="18" height="18" viewBox="0 0 18 18" aria-label="Locked" role="img"><rect x="3" y="8" width="12" height="9" fill="{{accent}}"></rect><path d="M6 8 V5 A3 3 0 0 1 12 5 V8" stroke="{{accent}}" stroke-width="2" fill="none"></path></svg>
+</div>
+</sc-for>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FF4F00","options":["#FF4F00","#2D5BFF","#00B37A"]},"currentTier":{"editor":"int","min":12,"max":18,"default":14},"$preview":{"width":1280,"height":720}}'>
+class Component extends DCLogic {
+renderVals() {
+const accent = this.props.accent ?? '#FF4F00';
+const cur = this.props.currentTier ?? 14;
+const data = [
+[12, 'Currency', '200 Bolts', 'Kart body', 'Chrome Viper'],
+[13, 'Emote', 'Thumbs Up', 'Trail', 'Ion Wake'],
+[14, 'Currency', '300 Bolts', 'Weapon skin', 'Volt Mk II: Static'],
+[15, 'Banner', 'Overdrive Flag', 'Currency', '500 Gems'],
+[16, 'Currency', '200 Bolts', 'Emote', 'Victory Spin'],
+[17, 'Spray', 'Lightning Tag', 'Pet', 'Sparkfox'],
+[18, 'Crate', 'Standard Crate', 'Outfit', 'Overdrive Suit']
+];
+const tiers = data.map(([n, ft, f, pt, p]) => ({
+n, freeType: ft, free: f, premType: pt, prem: p,
+claimed: n < cur, claimable: n === cur, fade: n > cur ? 0.55 : 1,
+bar: n <= cur ? accent : '#C9C7BF', num: n <= cur ? '#111111' : '#8A887F'
+}));
+return { accent, tier: cur, nextTier: cur + 1, xp: 640, xpPct: '64%', tiers };
+}
+}
+</script>
+</body>
+</html>

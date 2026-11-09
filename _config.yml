@@ -1,0 +1,6 @@
+# GitHub Pages: render the board READMEs, skip folders that are only source files.
+exclude:
+  - designs/source
+  - models
+  - tools
+  - sfx/wav
