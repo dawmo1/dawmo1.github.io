@@ -4,7 +4,7 @@ One folder per piece of work. Each page has the screenshots, how to use it in St
 
 | Piece | What it is | Boards it feeds |
 |---|---|---|
-| [interface/](interface/) | ProKit design system and two UI kits (racing + shooter), 13 screens | interface, graphics, scripter |
+| [interface/](interface/) | ProKit design system and two UI kits (racing + shooter), 13 screens | graphics, scripter |
 | [vfx/](vfx/) | Five layered abilities and a noise-generated flipbook set | vfx, scripter |
 | [animation/](animation/) | Ten R15 animations on a block rig: combat set plus movement | animator |
 | [models/](models/) | Realistic, game-ready vehicles, weapons and furniture | modeler, graphics |

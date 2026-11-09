@@ -12,12 +12,11 @@ Each folder has a ready-to-paste post for that Discord channel and the images to
 
 | Board | Status | Best pieces |
 |---|---|---|
-| [interface](boards/interface-hiring/) | Ready | Two UI kits (racing + shooter), 13 screens built in Studio |
 | [vfx](boards/vfx-hiring/) | Ready | 5 layered abilities, noise-generated flipbooks |
 | [sound](boards/sound-hiring/) | Ready | 28 original sounds, mixed onto buses |
 | [modeler](boards/modeler-hiring/) | Ready | Supercar, 70s land yacht, mud runner, lounge chair, living-room set, revolver, launcher, grenade, football |
 | [graphics](boards/graphics-hiring/) | Ready | Icon set, item renders, UI art |
-| [scripter](boards/scripter-hiring/) | Ready, with a gap | ActionVFX, UIKit, SFXPresets modules |
+| [scripter](boards/scripter-hiring/) | Ready, with a gap | ShowcaseVFX, ProKit, SFXPresets modules |
 | [programmer](boards/programmer-hiring/) | Ready, with a gap | Luau modules + asset-generation tools |
 | [builder](boards/builder-hiring/) | Not yet | Needs a finished map |
 | [animator](boards/animator-hiring/) | Ready | Ten R15 animations: sword, punch, kick, block, throw, draw, run, jump, emote, idle |
