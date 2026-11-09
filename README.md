@@ -15,7 +15,7 @@ Each folder has a ready-to-paste post for that Discord channel and the images to
 | [interface](boards/interface-hiring/) | Ready | 5 game UIs built in Studio, 8 mockups |
 | [vfx](boards/vfx-hiring/) | Ready | 6 layered abilities, 13 flipbooks |
 | [sound](boards/sound-hiring/) | Ready | 28 original sounds, mixed onto buses |
-| [modeler](boards/modeler-hiring/) | Ready | Supercar, revolver, launcher, greatsword, lounge chair, grenade, football, kart, chest |
+| [modeler](boards/modeler-hiring/) | Ready | Supercar, 70s land yacht, mud runner, lounge chair, living-room set, revolver, launcher, grenade, football |
 | [graphics](boards/graphics-hiring/) | Ready | Icon set, item and pet renders, UI art |
 | [scripter](boards/scripter-hiring/) | Ready, with a gap | ActionVFX, UIKit, SFXPresets modules |
 | [programmer](boards/programmer-hiring/) | Ready, with a gap | Luau modules + asset-generation tools |
