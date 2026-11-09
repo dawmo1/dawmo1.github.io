@@ -4,7 +4,7 @@ UI, VFX, sound, 3D models and Luau, built for Roblox and shown running in Studio
 
 **Website:** [dawmo1.github.io](https://dawmo1.github.io) · **Discord:** ktfp · **Roblox:** [BizarreWasTaken](https://www.roblox.com/users/profile?username=BizarreWasTaken)
 
-<img src="review/studio/vfx_portal.jpg" alt="Portal ability running in Roblox Studio" width="49%"> <img src="review/studio/ui_eggshop.jpg" alt="Egg shop UI built in Roblox Studio" width="49%">
+<img src="site/img/ui_apex_garage.jpg" alt="APEX garage UI built in Roblox Studio" width="49%"> <img src="site/img/vfx_storm.jpg" alt="Storm strike ability running in Roblox Studio" width="49%">
 
 ## Hiring boards
 
@@ -12,8 +12,8 @@ Each folder has a ready-to-paste post for that Discord channel and the images to
 
 | Board | Status | Best pieces |
 |---|---|---|
-| [interface](boards/interface-hiring/) | Ready | 5 game UIs built in Studio, 8 mockups |
-| [vfx](boards/vfx-hiring/) | Ready | 6 layered abilities, 13 flipbooks |
+| [interface](boards/interface-hiring/) | Ready | Two UI kits (racing + shooter), 13 screens built in Studio |
+| [vfx](boards/vfx-hiring/) | Ready | 5 layered abilities, noise-generated flipbooks |
 | [sound](boards/sound-hiring/) | Ready | 28 original sounds, mixed onto buses |
 | [modeler](boards/modeler-hiring/) | Ready | Supercar, 70s land yacht, mud runner, lounge chair, living-room set, revolver, launcher, grenade, football |
 | [graphics](boards/graphics-hiring/) | Ready | Icon set, item and pet renders, UI art |

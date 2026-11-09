@@ -1,0 +1,25 @@
+{
+ "atlas": "rbxassetid://73960392936381",
+ "supercar": "rbxassetid://111934498572773",
+ "donk": "rbxassetid://73866820196522",
+ "mudrunner": "rbxassetid://136427644422507",
+ "revolver": "rbxassetid://120486110575901",
+ "launcher": "rbxassetid://102070191498726",
+ "grenade": "rbxassetid://96904214739327",
+ "radial": "rbxassetid://83055659488836",
+ "corner": "rbxassetid://95256345496103",
+ "supercar_maps": {
+  "body": {
+   "ColorMap": "rbxassetid://91578493599404",
+   "MetalnessMap": "rbxassetid://80312136527911",
+   "RoughnessMap": "rbxassetid://117288527837125",
+   "NormalMap": "rbxassetid://108075733364256"
+  },
+  "wheel": {
+   "ColorMap": "rbxassetid://131234519092013",
+   "MetalnessMap": "rbxassetid://140333881816772",
+   "RoughnessMap": "rbxassetid://113333319416184",
+   "NormalMap": "rbxassetid://134242445405299"
+  }
+ }
+}
