@@ -7,3 +7,6 @@ assets/roblox_upload/pbr/
 assets/renders/_tt_*/
 review/*
 !review/studio/
+# animation pose checks and GIF source frames (the GIFs in animation/previews are kept)
+animation/review/
+animation/_avatar_archive/

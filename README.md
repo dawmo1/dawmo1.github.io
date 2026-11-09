@@ -20,7 +20,7 @@ Each folder has a ready-to-paste post for that Discord channel and the images to
 | [scripter](boards/scripter-hiring/) | Ready, with a gap | ActionVFX, UIKit, SFXPresets modules |
 | [programmer](boards/programmer-hiring/) | Ready, with a gap | Luau modules + asset-generation tools |
 | [builder](boards/builder-hiring/) | Not yet | Needs a finished map |
-| [animator](boards/animator-hiring/) | Not yet | Needs R15 animations |
+| [animator](boards/animator-hiring/) | Ready | Ten R15 animations: sword, punch, kick, block, throw, draw, run, jump, emote, idle |
 
 ## What's in the repo
 
