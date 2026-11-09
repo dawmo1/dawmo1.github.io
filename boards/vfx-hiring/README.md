@@ -15,7 +15,7 @@ Layered ability effects made for Roblox ParticleEmitters, with my own flipbook t
 **Delivery:** a ModuleScript you call with one line (`VFX.Fireball(from, to)`), plus all textures uploaded or as PNGs
 
 **Payment:** Robux or USD (PayPal) · per task or per project · DM for rates
-**Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [SITE URL]
+**Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [dawmo1.github.io](https://dawmo1.github.io)
 ```
 
 ## Images to attach

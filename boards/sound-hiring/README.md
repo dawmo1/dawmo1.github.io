@@ -15,7 +15,7 @@ Original game SFX, made from scratch (no library samples, so no licensing questi
 **Delivery:** .ogg files (uploaded or raw), plus a ModuleScript to play them
 
 **Payment:** Robux or USD (PayPal) · per task or per project · DM for rates
-**Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [SITE URL]
+**Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [dawmo1.github.io](https://dawmo1.github.io)
 ```
 
 ## Images to attach

@@ -15,7 +15,7 @@ I write Luau game modules and the tools around them, so assets come out of a scr
 **Delivery:** code in your place or repo, with comments on the why
 
 **Payment:** Robux or USD (PayPal) · per task or per project · DM for rates
-**Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [SITE URL]
+**Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [dawmo1.github.io](https://dawmo1.github.io)
 ```
 
 ## Images to attach

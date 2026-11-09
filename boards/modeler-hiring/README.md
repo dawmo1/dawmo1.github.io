@@ -15,7 +15,7 @@ Stylised low-poly models built in Blender at Roblox scale, checked against an R1
 **Delivery:** .fbx/.obj ready for Studio import, plus the .blend
 
 **Payment:** Robux or USD (PayPal) · per task or per project · DM for rates
-**Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [SITE URL]
+**Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [dawmo1.github.io](https://dawmo1.github.io)
 ```
 
 ## Images to attach

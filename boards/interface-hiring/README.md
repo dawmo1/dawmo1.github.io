@@ -16,7 +16,7 @@ I design game UI and build it in Studio myself, so what you approve is what ship
 **Delivery:** ScreenGui in your place or an .rbxm, plus source mockups
 
 **Payment:** Robux or USD (PayPal) · per task or per project · DM for rates
-**Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [SITE URL]
+**Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [dawmo1.github.io](https://dawmo1.github.io)
 ```
 
 ## Images to attach
