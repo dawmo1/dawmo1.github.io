@@ -16,7 +16,7 @@ Each folder has a ready-to-paste post for that Discord channel and the images to
 | [vfx](boards/vfx-hiring/) | Ready | 5 layered abilities, noise-generated flipbooks |
 | [sound](boards/sound-hiring/) | Ready | 28 original sounds, mixed onto buses |
 | [modeler](boards/modeler-hiring/) | Ready | Supercar, 70s land yacht, mud runner, lounge chair, living-room set, revolver, launcher, grenade, football |
-| [graphics](boards/graphics-hiring/) | Ready | Icon set, item and pet renders, UI art |
+| [graphics](boards/graphics-hiring/) | Ready | Icon set, item renders, UI art |
 | [scripter](boards/scripter-hiring/) | Ready, with a gap | ActionVFX, UIKit, SFXPresets modules |
 | [programmer](boards/programmer-hiring/) | Ready, with a gap | Luau modules + asset-generation tools |
 | [builder](boards/builder-hiring/) | Not yet | Needs a finished map |
@@ -33,7 +33,7 @@ Each folder has a ready-to-paste post for that Discord channel and the images to
 | `models/` | `portfolio_models.blend` with every model and an R15 reference rig |
 | `assets/` | Renders, turntables, icons, uploaded Roblox asset ids |
 | `review/studio/` | Screenshots taken in Roblox Studio |
-| `showcase/` | `vfx-sfx.html`: every effect and every sound, playable |
+| [`showcase/`](showcase/) | One page per piece (interface, VFX, animation, models, sound) with screenshots, usage and source links; `vfx-sfx.html` plays every effect and sound |
 | `tools/` | The generators: textures, icons, SFX, Blender render jobs |
 
 ## Rebuilding the assets

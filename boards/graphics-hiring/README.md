@@ -1,4 +1,4 @@
-# #graphics-hiring: Graphics (icons, UI art, item art)
+# #graphics-hiring: Graphics (icons, item art, UI art)
 
 **Status:** ready to post.
 
@@ -8,11 +8,11 @@ Paste this into **#graphics-hiring** and attach the images below.
 
 ```
 **[FOR HIRE] Game Graphics: Icons, Item Art, UI Art**
-Chunky, readable game icons and item renders sized for Roblox UI.
+Readable game icons and item renders sized for Roblox UI, made to match each other as a set.
 
-**What I make:** currency and stat icons, item/pet/egg renders for shop slots, avatar headshots, UI screen art
+**What I make:** currency and stat icons, item renders for shop and inventory slots, UI screen art
 **Format:** transparent PNG at 512 px (or what you need), consistent outline and lighting across a set
-**Delivery:** PNGs + uploaded asset ids if you want them in your game
+**Delivery:** PNGs, plus uploaded asset ids if you want them in your game
 
 **Payment:** Robux or USD (PayPal) · per task or per project · DM for rates
 **Contact:** ktfp  ·  **Roblox:** BizarreWasTaken (https://www.roblox.com/users/profile?username=BizarreWasTaken)  ·  **Portfolio:** [dawmo1.github.io](https://dawmo1.github.io)
@@ -20,20 +20,18 @@ Chunky, readable game icons and item renders sized for Roblox UI.
 
 ## Images to attach
 
-<img src="../../designs/png/EggShop.png" alt="Egg shop art" width="49%"> <img src="../../designs/png/Main.png" alt="Main HUD art" width="49%">
-<img src="../../assets/renders/eggs_group.png" alt="Egg set" width="49%"> <img src="../../assets/renders/pets_group.png" alt="Pet set" width="49%">
-<img src="../../assets/renders/sword_ui.png" alt="Item icon render" width="49%"> <img src="../../assets/renders/avatar_kaiyo.png" alt="Avatar render" width="49%">
+<img src="../../assets/icons/icon_set.png" alt="12-icon game set" width="98%">
+<img src="../../ui/roblox/assets/art_supercar.png" alt="Supercar item art" width="49%"> <img src="../../ui/roblox/assets/art_revolver.png" alt="Revolver item art" width="49%">
+<img src="../../assets/renders/blaster_ui.png" alt="Blaster shop render" width="49%"> <img src="../../site/img/ui_fl_store.jpg" alt="Item art in a store screen" width="49%">
 
 | File | What it shows |
 |---|---|
-| [`designs/png/EggShop.png`](../../designs/png/EggShop.png) | Egg shop art |
-| [`designs/png/Main.png`](../../designs/png/Main.png) | Main HUD art |
-| [`assets/renders/eggs_group.png`](../../assets/renders/eggs_group.png) | Egg set |
-| [`assets/renders/pets_group.png`](../../assets/renders/pets_group.png) | Pet set |
-| [`assets/renders/sword_ui.png`](../../assets/renders/sword_ui.png) | Item icon render |
-| [`assets/renders/avatar_kaiyo.png`](../../assets/renders/avatar_kaiyo.png) | Avatar render |
+| [`assets/icons/icon_set.png`](../../assets/icons/icon_set.png) | The 12-icon set: coin, gem, cash, heart, star, gift, sword, shield, skull, lock, plus, wave |
+| [`ui/roblox/assets/art_*.png`](../../ui/roblox/assets/) | Transparent item art for the supercar, land yacht, mud runner, revolver, launcher and grenade |
+| [`assets/renders/blaster_ui.png`](../../assets/renders/blaster_ui.png) | Shop-slot renders (also [kart](../../assets/renders/kart_ui.png) and [sword](../../assets/renders/sword_ui.png)) |
+| [`site/img/ui_fl_store.jpg`](../../site/img/ui_fl_store.jpg) | The item art in use in a store screen |
 
 ## What's behind it
 
-- `assets/icons/`: 12 game icons (coin, gem, cash, heart, skull, star, lock, plus, gift, sword, shield, wave) drawn from signed-distance shapes by `tools/make_icons.py`, so a new icon matches the set exactly
-- Item and pet art is rendered from the 3D models in `models/`, so icons always match the in-game mesh
+- `assets/icons/`: 12 icons drawn from signed-distance shapes by `tools/make_icons.py`, so a new icon matches the set exactly
+- Item art is rendered from the 3D models in `models/`, so an icon always matches the in-game mesh
