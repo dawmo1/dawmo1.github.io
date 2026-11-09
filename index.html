@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>BizarreWasTaken · Roblox Developer</title>
-<meta name="description" content="Full-stack Roblox developer: game UI, VFX, sound, realistic 3D models and Luau, shown running in Roblox Studio.">
+<meta name="description" content="Full-stack Roblox developer: game UI, VFX, sound, and realistic 3D models, shown running in Roblox Studio.">
 <meta property="og:title" content="BizarreWasTaken · Roblox Developer">
-<meta property="og:description" content="Game UI, VFX, sound, 3D models and Luau, shown running in Roblox Studio.">
+<meta property="og:description" content="Game UI, VFX, sound, and 3D models, shown running in Roblox Studio.">
 <meta property="og:image" content="review/studio/vfx_portal.jpg">
 <meta name="theme-color" content="#0b0c10">
 <style>
@@ -124,17 +124,6 @@ section { padding-block: 88px 8px; scroll-margin-top: 56px; }
 .sound b { display: block; font-weight: 600; }
 .sound small { color: var(--muted); font-size: .8125rem; }
 
-/* ---------- code ---------- */
-pre { margin: 0; padding: 20px; border-radius: var(--radius); background: #0f1015; overflow-x: auto;
-  font: .875rem/1.65 ui-monospace, "SF Mono", Menlo, monospace; color: #d8dbe2; }
-pre .c { color: #6c7280; } pre .k { color: #ff7ab2; } pre .f { color: #5af0ff; } pre .s { color: #fc6a5d; }
-.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 12px; }
-.file { display: block; padding: 14px 16px; border-radius: var(--radius-sm); background: var(--surface); text-decoration: none;
-  transition: transform .1s var(--ease-press), background .2s; }
-.file:hover { background: var(--surface-2); } .file:active { transform: scale(.97); }
-.file b { font: 600 .9375rem ui-monospace, "SF Mono", Menlo, monospace; }
-.file span { display: block; color: var(--muted); font-size: .875rem; margin-top: 2px; }
-
 /* ---------- hire ---------- */
 .boards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
 .board { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px; border-radius: var(--radius-sm);
@@ -164,10 +153,10 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
   .nav { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
   .lb .round { background: #2a2c34; -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
-@media (prefers-contrast: more) { .card, .sound, .file, .board { outline: 1px solid rgba(255,255,255,.35); } }
+@media (prefers-contrast: more) { .card, .sound, .board { outline: 1px solid rgba(255,255,255,.35); } }
 @media (prefers-reduced-motion: reduce) {
-  .btn, .card, .sound, .file, .board, .arrows button { transition: none; }
-  .btn:active, .card:active, .sound:active, .file:active, .board:active { transform: none; }
+  .btn, .card, .sound, .board, .arrows button { transition: none; }
+  .btn:active, .card:active, .sound:active, .board:active { transform: none; }
   .sound.playing .dot { animation: none; }
 }
 </style>
@@ -178,7 +167,7 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
     <a class="brand" href="#top">BizarreWasTaken</a>
     <nav class="links" aria-label="Sections">
       <span class="pill" aria-hidden="true"></span>
-      <a href="#interface">Interface</a><a href="#vfx">VFX</a><a href="#models">Models</a><a href="#sound">Sound</a><a href="#code">Code</a><a href="#hire">Hire</a>
+      <a href="#interface">Interface</a><a href="#vfx">VFX</a><a href="#models">Models</a><a href="#sound">Sound</a><a href="#hire">Hire</a>
     </nav>
   </div>
 </header>
@@ -186,7 +175,7 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
 <main id="top">
 <div class="wrap hero">
   <p class="eyebrow">Full-stack Roblox developer</p>
-  <h1>UI, VFX, sound, models and Luau.</h1>
+  <h1>UI, VFX, sound, models and animation.</h1>
   <p class="lead">Everything here was made for this portfolio. The UI, abilities and models are shown running in Roblox Studio, with no store packs or sample libraries.</p>
   <div class="cta">
     <a class="btn primary" href="#hire">Work with me</a>
@@ -254,14 +243,17 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
     <button class="card" data-src="assets/renders/chest_closed_hero.png" data-title="Loot chest, closed" data-sub="10k tris · iron straps · brass"><span class="media"><img loading="lazy" src="site/img/chest_closed_hero.jpg" alt="Closed treasure chest"></span><span class="cap"><b>Loot chest, closed</b><span>Iron straps · brass</span></span></button>
     <button class="card" data-src="assets/renders/blaster_hero.png" data-title="VOLT-9 blaster" data-sub="16k tris · energy cell · copper coils"><span class="media"><img loading="lazy" src="site/img/blaster_hero.jpg" alt="Sci-fi energy rifle"></span><span class="cap"><b>VOLT-9 blaster</b><span>Energy cell · copper coils</span></span></button>
     <button class="card" data-src="assets/renders/blaster_detail.png" data-title="Blaster close-up" data-sub="Glass cell · panel seams · neon"><span class="media"><img loading="lazy" src="site/img/blaster_detail.jpg" alt="Close-up of the blaster"></span><span class="cap"><b>Blaster close-up</b><span>Glass cell · panel seams</span></span></button>
-  </div>
-  <h3>Running in Roblox Studio</h3>
-  <div class="rail">
-    <button class="card" data-src="review/studio/pbr_carbine.jpg" data-title="Carbine in Studio" data-sub="SurfaceAppearance PBR"><span class="media"><img loading="lazy" src="review/studio/pbr_carbine.jpg" alt="Carbine imported into Roblox Studio"></span><span class="cap"><b>Carbine</b><span>SurfaceAppearance PBR</span></span></button>
-    <button class="card" data-src="review/studio/pbr_greatsword.jpg" data-title="Greatsword in Studio" data-sub="Neon ember strips"><span class="media"><img loading="lazy" src="review/studio/pbr_greatsword.jpg" alt="Greatsword imported into Roblox Studio"></span><span class="cap"><b>Greatsword</b><span>Neon ember strips</span></span></button>
-    <button class="card" data-src="review/studio/pbr_blaster.jpg" data-title="Blaster in Studio" data-sub="Neon glow mesh"><span class="media"><img loading="lazy" src="review/studio/pbr_blaster.jpg" alt="Blaster imported into Roblox Studio"></span><span class="cap"><b>Blaster</b><span>Neon glow mesh</span></span></button>
-    <button class="card" data-src="review/studio/pbr_chests.jpg" data-title="Chests in Studio" data-sub="Closed and open"><span class="media"><img loading="lazy" src="review/studio/pbr_chests.jpg" alt="Both chests imported into Roblox Studio"></span><span class="cap"><b>Loot chests</b><span>Closed and open</span></span></button>
-    <button class="card" data-src="review/studio/pbr_kart.jpg" data-title="Kart in Studio" data-sub="6.3 studs long"><span class="media"><img loading="lazy" src="review/studio/pbr_kart.jpg" alt="Kart imported into Roblox Studio"></span><span class="cap"><b>Kart</b><span>6.3 studs long</span></span></button>
+    <button class="card" data-src="assets/renders/revolver_hero.png" data-title="Warden revolver" data-sub="17k tris · blued steel · walnut grips"><span class="media"><img loading="lazy" src="site/img/revolver_hero.jpg" alt="Revolver with blued steel and walnut grips"></span><span class="cap"><b>Warden revolver</b><span>Blued steel · walnut</span></span></button>
+    <button class="card" data-src="assets/renders/revolver_detail.png" data-title="Revolver frame" data-sub="Fluted cylinder · hammer · brass medallion"><span class="media"><img loading="lazy" src="site/img/revolver_detail.jpg" alt="Close-up of the revolver frame and cylinder"></span><span class="cap"><b>Frame close-up</b><span>Fluted cylinder · hammer</span></span></button>
+    <button class="card" data-src="assets/renders/launcher_hero.png" data-title="Rocket launcher" data-sub="13k tris · lacquered wood · olive warhead"><span class="media"><img loading="lazy" src="site/img/launcher_hero.jpg" alt="Shoulder rocket launcher with red wood heat guard"></span><span class="cap"><b>Rocket launcher</b><span>Ribbed wood · olive warhead</span></span></button>
+    <button class="card" data-src="assets/renders/launcher_detail.png" data-title="Launcher receiver" data-sub="Grips · sights · optic mount"><span class="media"><img loading="lazy" src="site/img/launcher_detail.jpg" alt="Close-up of the launcher grips and sights"></span><span class="cap"><b>Receiver close-up</b><span>Grips · sights</span></span></button>
+    <button class="card" data-src="assets/renders/lounge_chair_hero.png" data-title="Lounge chair" data-sub="19k tris · channel-tufted cognac leather"><span class="media"><img loading="lazy" src="site/img/lounge_chair_hero.jpg" alt="Puffy channel-tufted cognac leather lounge chair"></span><span class="cap"><b>Lounge chair</b><span>Tufted cognac leather</span></span></button>
+    <button class="card" data-src="assets/renders/lounge_chair_detail.png" data-title="Leather close-up" data-sub="Pebbled grain · puckered channels · worn patina"><span class="media"><img loading="lazy" src="site/img/lounge_chair_detail.jpg" alt="Close-up of the leather grain and channels"></span><span class="cap"><b>Leather close-up</b><span>Grain · puckers · patina</span></span></button>
+    <button class="card" data-src="assets/renders/supercar_hero.png" data-title="Supercar" data-sub="11k tris across body, wheel and light meshes · black aero"><span class="media"><img loading="lazy" src="site/img/supercar_hero.jpg" alt="White wedge-shaped supercar with black aero and red calipers"></span><span class="cap"><b>Supercar</b><span>Separate spinning wheels</span></span></button>
+    <button class="card" data-src="assets/renders/supercar_rear.png" data-title="Supercar rear" data-sub="Wing · louvres · tail light bar"><span class="media"><img loading="lazy" src="site/img/supercar_rear.jpg" alt="Rear three-quarter view of the supercar"></span><span class="cap"><b>Supercar rear</b><span>Wing · louvres · tail bar</span></span></button>
+    <button class="card" data-src="assets/renders/grenade_hero.png" data-title="Frag grenade" data-sub="10.5k tris · stencilled olive paint · zinc fuze"><span class="media"><img loading="lazy" src="site/img/grenade_hero.jpg" alt="Olive frag grenade with pull ring and lever"></span><span class="cap"><b>Frag grenade</b><span>Stencilled paint · zinc fuze</span></span></button>
+    <button class="card" data-src="assets/renders/grenade_detail.png" data-title="Stencil close-up" data-sub="Bridged letters · worn ink"><span class="media"><img loading="lazy" src="site/img/grenade_detail.jpg" alt="Close-up of worn stencilled lettering"></span><span class="cap"><b>Stencil close-up</b><span>Bridged letters · worn ink</span></span></button>
+    <button class="card" data-src="assets/renders/football_hero.png" data-title="Football" data-sub="8.6k tris · pebbled leather · laces"><span class="media"><img loading="lazy" src="site/img/football_hero.jpg" alt="Brown leather football with white laces and stripes"></span><span class="cap"><b>Football</b><span>Pebbled leather · laces</span></span></button>
   </div>
   <h3>Stylized pets, eggs and avatars</h3>
   <div class="rail sq">
@@ -278,29 +270,6 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
   <p class="lead">Made from scratch with filters and envelopes, levels set per sound, and three takes for anything that repeats. Press a ×3 sound again to hear the next take.</p>
   <div class="sounds" id="sounds"></div>
   <p style="margin-top:16px"><a class="btn" href="showcase/vfx-sfx.html#sounds">All 28 sounds</a></p>
-</section>
-
-<section id="code" class="wrap">
-  <p class="eyebrow">Luau + tools</p>
-  <h2>Code a team can call in one line</h2>
-  <p class="lead">Typed (<code>--!strict</code>) ModuleScripts with usage notes at the top, plus the Python tools that generate the textures, icons and sounds above.</p>
-<pre><span class="c">-- client: play an ability where the server says it hit</span>
-<span class="k">local</span> VFX = <span class="f">require</span>(ReplicatedStorage.ActionVFX)
-<span class="k">local</span> SFX = <span class="f">require</span>(ReplicatedStorage.SFXPresets)
-
-Remotes.Ability.OnClientEvent:<span class="f">Connect</span>(<span class="k">function</span>(kind, pos)
-	<span class="k">if</span> kind == <span class="s">"Lightning"</span> <span class="k">then</span>
-		VFX.<span class="f">LightningStrike</span>(pos)
-		SFX.<span class="f">playAt</span>(<span class="s">"lightning_strike"</span>, pos)
-	<span class="k">end</span>
-<span class="k">end</span>)</pre>
-  <div class="files">
-    <a class="file" href="https://github.com/dawmo1/roblox-portfolio/blob/main/vfx/roblox/ActionVFX.lua"><b>ActionVFX.lua</b><span>6 abilities, emitter builder, camera shake</span></a>
-    <a class="file" href="https://github.com/dawmo1/roblox-portfolio/blob/main/ui/roblox/UIKit.lua"><b>UIKit.lua</b><span>Panels, stroked text, juicy buttons</span></a>
-    <a class="file" href="https://github.com/dawmo1/roblox-portfolio/blob/main/sfx/SFXPresets.lua"><b>SFXPresets.lua</b><span>Mixing buses, random takes, 3D sound</span></a>
-    <a class="file" href="https://github.com/dawmo1/roblox-portfolio/blob/main/models/roblox/ApplyPBR.lua"><b>ApplyPBR.lua</b><span>Wires imported meshes to PBR maps</span></a>
-    <a class="file" href="https://github.com/dawmo1/roblox-portfolio/tree/main/tools"><b>tools/</b><span>Texture, icon and SFX generators</span></a>
-  </div>
 </section>
 
 <section id="hire" class="wrap">
