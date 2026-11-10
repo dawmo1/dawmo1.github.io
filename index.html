@@ -9,6 +9,7 @@
 <meta property="og:description" content="Game UI, VFX, sound, and 3D models, shown running in Roblox Studio.">
 <meta property="og:image" content="site/img/ui_apex_garage.jpg">
 <meta name="theme-color" content="#0b0c10">
+<script>document.documentElement.classList.add('js')</script>
 <style>
 :root {
   --bg: #0b0c10; --surface: #15171d; --surface-2: #1d2028;
@@ -175,6 +176,51 @@ section.wrap { padding-block: 72px 8px; scroll-margin-top: 56px; }
 .sound small { color: var(--muted); font-size: .8125rem; }
 
 #hire { padding-bottom: 24px; }
+
+/* ---------- about ---------- */
+.about { padding-block: 64px 0; display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: center; }
+.about .lead { margin-bottom: 0; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stats div { background: var(--surface); border-radius: var(--radius-sm); padding: 18px; }
+.stats b { display: block; font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1; letter-spacing: -.03em; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stats span { display: block; margin-top: 6px; color: var(--muted); font-size: .875rem; }
+@media (max-width: 760px) { .about { grid-template-columns: 1fr; gap: 22px; } }
+
+/* ---------- hire terms ---------- */
+.terms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0 24px; }
+.term { background: var(--surface); border-radius: var(--radius); padding: 22px; }
+.term svg { width: 28px; height: 28px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.term b { display: block; margin: 12px 0 6px; font-size: 1.125rem; letter-spacing: -.01em; }
+.term p { margin: 0; color: var(--muted); line-height: 1.5; }
+@media (max-width: 640px) { .terms { grid-template-columns: 1fr; } }
+
+/* ---------- juice: scroll progress, reveals, hover lift, tilt ---------- */
+:root { --ease-out: cubic-bezier(.23,1,.32,1); }
+.progress { position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: linear-gradient(90deg, var(--accent), #8a7dff);
+  transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
+/* content stays visible if scripts never run: only .js pages hide-then-reveal */
+.js .reveal { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+.js .reveal.in { opacity: 1; transform: none; filter: none;
+  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out), filter .7s var(--ease-out); transition-delay: var(--d, 0ms); }
+.js h1 .w { display: inline-block; opacity: 0; transform: translateY(.35em); filter: blur(8px);
+  animation: wordIn .8s var(--ease-out) forwards; animation-delay: calc(80ms + var(--i) * 70ms); }
+@keyframes wordIn { to { opacity: 1; transform: none; filter: none; } }
+.eyebrow::before { content: ""; display: inline-block; width: 18px; height: 2px; margin-right: 8px; vertical-align: middle; background: currentColor; border-radius: 2px; }
+.btn.primary { box-shadow: 0 0 0 0 rgba(90,240,255,0); transition: transform .1s var(--ease-press), background .2s, box-shadow .3s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .btn.primary:hover { box-shadow: 0 8px 28px -6px rgba(90,240,255,.55); }
+  .card, .cat, .term, .stats div { transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out); }
+  .card:hover, .cat:hover, .term:hover, .stats div:hover { transform: translateY(-4px);
+    box-shadow: 0 22px 44px -22px rgba(90,240,255,.45), 0 0 0 1px rgba(90,240,255,.22); }
+  .card:active, .cat:active { transform: translateY(-2px) scale(.98); transition-duration: .1s; }
+  /* glare that follows the pointer on tilt tiles */
+  .tilt::before { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none; opacity: 0;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.14), transparent 45%); transition: opacity .3s; }
+  .tilt:hover::before { opacity: 1; }
+}
+.tilt { position: relative; }
+#copy-discord.ok { animation: pop .35s var(--ease-out); }
+@keyframes pop { 40% { transform: scale(1.06); } }
 footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: var(--muted); font-size: .875rem; }
 
 /* ---------- lightbox: dim to focus ---------- */
@@ -203,6 +249,9 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
   .btn, .card, .sound, .cat, .arrows button, .card img, .cat img { transition: none; }
   .btn:active, .card:active, .sound:active, .cat:active { transform: none; }
   .sound.playing .dot { animation: none; }
+  .js .reveal { transform: none; filter: none; }
+  .js h1 .w { animation-duration: .2s; transform: none; filter: none; }
+  .card:hover, .cat:hover, .term:hover, .stats div:hover { transform: none; }
 }
 </style>
 </head>
@@ -216,6 +265,7 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
     </nav>
     <a class="btn primary sm" href="#hire">Hire</a>
   </div>
+  <span class="progress" aria-hidden="true"></span>
 </header>
 
 <main id="top">
@@ -234,6 +284,20 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
     <button class="card" data-src="assets/renders/supercar_hero.png" data-title="Supercar" data-sub="Baked PBR · under 20k tris per mesh"><span class="media"><img src="site/img/supercar_hero.jpg" alt="White mid-engine supercar render"><span class="ov"><span class="tag">Model</span><b>Supercar</b></span></span></button>
     <button class="card" data-src="site/img/ui_fl_combathud.jpg" data-title="Combat HUD" data-sub="Compass · kill feed · ammo · hit marker"><span class="media"><img src="site/img/ui_fl_combathud.jpg" alt="Shooter combat HUD over a dockyard"><span class="ov"><span class="tag">Interface</span><b>Combat HUD</b></span></span></button>
     <button class="card" data-src="assets/renders/greatsword_hero.png" data-title="Emberbrand greatsword" data-sub="11k tris · pattern-welded steel · ember inlay"><span class="media"><img src="site/img/greatsword_hero.jpg" alt="Longsword with ember inlay and gold guard"><span class="ov"><span class="tag">Model</span><b>Emberbrand greatsword</b></span></span></button>
+  </div>
+</div>
+
+<div class="wrap about home">
+  <div>
+    <p class="eyebrow">About</p>
+    <h2>Hi, I'm BizarreWasTaken.</h2>
+    <p class="lead">I'm a Roblox developer with 1–2 years of experience, focused on realistic, game-ready 3D models. I also cover the rest of a game: UI, VFX, animation, sound and Luau scripting, so one developer can take a feature from first model to finished in-game result. Everything on this site was built for this portfolio and runs in Roblox Studio.</p>
+  </div>
+  <div class="stats">
+    <div><b data-n="14">14</b><span>game-ready models</span></div>
+    <div><b data-n="13">13</b><span>UI screens</span></div>
+    <div><b data-n="10">10</b><span>R15 animations</span></div>
+    <div><b data-n="28">28</b><span>original sounds</span></div>
   </div>
 </div>
 
@@ -360,7 +424,18 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
 <section id="hire" class="wrap">
   <p class="eyebrow">Hire</p>
   <h2>Work with me</h2>
-  <p class="lead">Robux or USD (PayPal), per task or per project. DM for rates.</p>
+  <div class="terms">
+    <div class="term">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg>
+      <b>Pricing</b>
+      <p>I prefer PayPal. Rates depend on the complexity of the work.</p>
+    </div>
+    <div class="term">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2.5"/></svg>
+      <b>Turnaround</b>
+      <p>Expect hours to days for smaller projects and weeks for bigger ones. If anything else affects the timeline, I'll tell you in our conversation.</p>
+    </div>
+  </div>
   <div class="cta">
     <button class="btn primary" type="button" id="copy-discord">Discord: ktfp <span aria-hidden="true">· copy</span></button>
     <a class="btn" href="https://www.roblox.com/users/profile?username=BizarreWasTaken" target="_blank" rel="noopener">Roblox: BizarreWasTaken</a>
@@ -440,6 +515,10 @@ const rubber = (x, dim, c = 0.55) => (x * dim * c) / (dim + c * Math.abs(x));
     if (!shown || reduceMotion.matches) { px.jump(a.offsetLeft); pw.jump(a.offsetWidth); shown = true; paint(); return; }
     px.to(a.offsetLeft); pw.to(a.offsetWidth);
   };
+  addEventListener('resize', (e) => {   // real resizes move the tabs; snap the pill to the current one
+    const a = links.find(l => l.getAttribute('aria-current') === 'true');
+    if (e.isTrusted && a) { px.jump(a.offsetLeft); pw.jump(a.offsetWidth); paint(); }
+  });
   const catOf = (hash) => { const h = hash.slice(1); return CATS.includes(h) ? h : ['', 'all', 'top'].includes(h) ? 'all' : null; };
   const enter = (els) => els.forEach((el, i) => el.animate(
     reduceMotion.matches ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
@@ -646,13 +725,75 @@ document.querySelectorAll('.arrows').forEach(box => {
   }
 })();
 
+/* ---------- juice ---------- */
+(() => {
+  const calm = () => reduceMotion.matches;
+
+  // headline arrives word by word
+  const h1 = document.querySelector('h1');
+  h1.innerHTML = h1.textContent.trim().split(/\s+/).map((w, i) => `<span class="w" style="--i:${i}">${w}</span>`).join(' ');
+
+  // scroll reveal: things fade up as they enter, staggered within each batch
+  const io = new IntersectionObserver((entries) => {
+    let n = 0;
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const el = e.target; io.unobserve(el);
+      const d = calm() ? 0 : Math.min(n++, 6) * 70;
+      el.style.setProperty('--d', d + 'ms'); el.classList.add('in');
+      // hand transform back to hover/press styles once the reveal is done
+      setTimeout(() => { el.classList.remove('reveal', 'in'); el.style.removeProperty('--d'); }, d + 750);
+      if (el.matches('.stats div')) count(el.querySelector('b'), d);
+    }
+  }, { rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.hero .lead, .hero .cta, .bento .card, main .eyebrow, main h2, section .lead, .about .lead, h3, .rail .card, .cat, .stats div, .term, #hire .cta')
+    .forEach(el => { if (!el.closest('.hero') || !el.matches('.eyebrow, h2')) { el.classList.add('reveal'); io.observe(el); } });
+  // sounds are built by script, so reveal them once they exist
+  requestAnimationFrame(() => document.querySelectorAll('.sound').forEach(el => { el.classList.add('reveal'); io.observe(el); }));
+
+  // numbers count up when the stats come into view
+  function count(b, delay) {
+    const end = +b.dataset.n; if (calm()) return;
+    const t0 = performance.now() + delay, dur = 900;
+    const tick = (t) => {
+      const p = Math.min(1, Math.max(0, (t - t0) / dur));
+      b.textContent = Math.round(end * (1 - (1 - p) ** 3));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    b.textContent = '0'; requestAnimationFrame(tick);
+  }
+
+  // scroll progress line under the nav
+  const bar = document.querySelector('.progress'); let queued = false;
+  const prog = () => { queued = false; const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`; };
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(prog); } }, { passive: true });
+  addEventListener('resize', prog); prog();
+
+  // featured and category tiles tilt toward the pointer, with a glare that follows it
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.bento .card, .cat').forEach(el => {
+      el.classList.add('tilt');
+      el.addEventListener('pointermove', (e) => {
+        if (calm()) return;
+        const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        el.style.setProperty('--mx', x * 100 + '%'); el.style.setProperty('--my', y * 100 + '%');
+        el.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 6}deg) rotateY(${(x - 0.5) * 8}deg) translateY(-4px)`;
+      });
+      const reset = () => { el.style.transform = ''; };
+      el.addEventListener('pointerleave', reset); el.addEventListener('pointerdown', reset);   // flat before the viewer measures it
+    });
+  }
+})();
+
 /* ---------- copy Discord handle ---------- */
 (() => {
   const b = document.getElementById('copy-discord'), hint = b.querySelector('span');
   b.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText('ktfp'); hint.textContent = '· copied'; }
+    try { await navigator.clipboard.writeText('ktfp'); hint.textContent = '· copied ✓'; }
     catch { hint.textContent = '· ktfp'; }
-    setTimeout(() => { hint.textContent = '· copy'; }, 1600);
+    b.classList.remove('ok'); void b.offsetWidth; b.classList.add('ok');
+    setTimeout(() => { hint.textContent = '· copy'; b.classList.remove('ok'); }, 1600);
   });
 })();
 </script>
