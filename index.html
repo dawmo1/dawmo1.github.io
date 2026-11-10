@@ -220,6 +220,59 @@ section.wrap { padding-block: 72px 8px; scroll-margin-top: 56px; }
 }
 .tilt { position: relative; }
 #copy-discord.ok { animation: pop .35s var(--ease-out); }
+
+/* ---------- live vfx playground ---------- */
+.playground { margin: 6px 0 48px; }
+.pg-stage { position: relative; border-radius: var(--radius); overflow: hidden; background: #07080d; aspect-ratio: 16 / 8; box-shadow: 0 0 0 1px rgba(90,240,255,.12); }
+.pg-stage canvas { display: block; width: 100%; height: 100%; cursor: crosshair; touch-action: manipulation; }
+.pg-hint { position: absolute; left: 14px; top: 12px; font-size: .8125rem; color: var(--muted); pointer-events: none; }
+.pg-sound { position: absolute; right: 12px; top: 10px; min-height: 32px; padding: 0 12px; border: 0; border-radius: 999px; font: inherit; font-size: .8125rem; font-weight: 600;
+  color: var(--text); background: rgba(40,42,50,.75); cursor: pointer; transition: transform .1s var(--ease-press); }
+.pg-sound[aria-pressed="false"] { color: var(--muted); }
+.pg-sound:active { transform: scale(.95); }
+.pg-picks { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin-top: 10px; }
+.pg-picks button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 10px; border: 0; border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--muted); font: inherit; font-size: .875rem; font-weight: 600; cursor: pointer; white-space: nowrap;
+  transition: transform .1s var(--ease-press), background .2s, color .2s, box-shadow .2s; -webkit-tap-highlight-color: transparent; }
+.pg-picks button::before { content: ""; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--c); box-shadow: 0 0 10px var(--c); }
+.pg-picks button:hover { background: var(--surface-2); color: var(--text); }
+.pg-picks button[aria-pressed="true"] { color: var(--text); background: var(--surface-2); box-shadow: inset 0 0 0 1.5px var(--c); }
+.pg-picks button:active { transform: scale(.96); }
+@media (max-width: 1000px) { .pg-picks { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 560px) { .pg-stage { aspect-ratio: 4 / 3; } .pg-picks { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- html vfx ---------- */
+body { overflow-x: clip; }
+/* hero: aurora glow + ember canvas, full-bleed behind the content */
+.hero { position: relative; isolation: isolate; }
+.hero-fx { position: absolute; z-index: -1; top: -56px; bottom: -120px; left: 50%; width: 100vw; transform: translateX(-50%); pointer-events: none; overflow: hidden;
+  -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent); }
+.hero-fx canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.aurora { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .32; will-change: transform; }
+.aurora.a { width: 46vw; height: 46vw; left: 48%; top: -18vw; background: #1fb7c9; animation: drift 22s ease-in-out infinite alternate; }
+.aurora.b { width: 38vw; height: 38vw; left: 68%; top: 4vw; background: #6a4dff; opacity: .24; animation: drift 28s ease-in-out infinite alternate-reverse; }
+@keyframes drift { to { transform: translate(-14vw, 8vw) scale(1.15); } }
+main, footer { position: relative; z-index: 1; }
+/* headline: a light sweep runs across each word as it lands */
+.js h1 .w { background: linear-gradient(110deg, var(--text) 42%, var(--accent) 50%, #b9a8ff 54%, var(--text) 62%) 100% 0 / 260% 100% no-repeat;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: wordIn .8s var(--ease-out) forwards, shine 1.5s ease-in-out forwards;
+  animation-delay: calc(80ms + var(--i) * 70ms), calc(950ms + var(--i) * 60ms); }
+@keyframes shine { to { background-position: 0 0; } }
+/* rotating light around the top pick and the main contact button */
+@property --ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.bento .card:first-child::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; z-index: 3;
+  background: conic-gradient(from var(--ang), transparent 0 62%, var(--accent) 80%, #b9a8ff 90%, transparent);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: spin 5s linear infinite; }
+@keyframes spin { to { --ang: 360deg; } }
+/* stats glow once their count lands */
+.stats b.done { animation: glow 1.2s var(--ease-out); }
+@keyframes glow { 30% { text-shadow: 0 0 22px rgba(90,240,255,.85); } }
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .bento .card:first-child::after, .stats b.done { animation: none; }
+  .js h1 .w { animation: wordIn .2s forwards; background-position: 0 0; }
+}
 @keyframes pop { 40% { transform: scale(1.06); } }
 footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: var(--muted); font-size: .875rem; }
 
@@ -270,6 +323,7 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
 
 <main id="top">
 <div class="wrap hero home">
+  <div class="hero-fx" aria-hidden="true"><span class="aurora a"></span><span class="aurora b"></span><canvas></canvas></div>
   <p class="eyebrow">Full-stack Roblox developer</p>
   <h1>UI, VFX, sound, models and animation.</h1>
   <p class="lead">Everything here was made for this portfolio. The UI, abilities and models are shown running in Roblox Studio, with no store packs or sample libraries.</p>
@@ -306,7 +360,7 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
   <div class="cats">
     <a class="cat" href="#interface"><span class="media"><img loading="lazy" src="site/img/ui_fl_loadout.jpg" alt=""></span><span class="ov"><b>Interface</b><span>13 screens · 2 UI kits</span></span></a>
     <a class="cat" href="#models"><span class="media"><img loading="lazy" src="site/img/donk_hero.jpg" alt=""></span><span class="ov"><b>Models</b><span>14 game-ready models</span></span></a>
-    <a class="cat" href="#vfx"><span class="media"><img loading="lazy" src="site/img/vfx_inferno.jpg" alt=""></span><span class="ov"><b>VFX</b><span>5 abilities · 7 flipbooks</span></span></a>
+    <a class="cat" href="#vfx"><span class="media"><img loading="lazy" src="site/img/vfx_inferno.jpg" alt=""></span><span class="ov"><b>VFX</b><span>8 live effects · 5 Studio abilities</span></span></a>
     <a class="cat" href="#animation"><span class="media"><img loading="lazy" src="animation/previews/sword.gif" alt=""></span><span class="ov"><b>Animation</b><span>10 R15 animations</span></span></a>
     <a class="cat" href="#sound"><span class="media wave" aria-hidden="true"><i style="--h:30%"></i><i style="--h:55%"></i><i style="--h:80%"></i><i style="--h:45%"></i><i style="--h:95%"></i><i style="--h:60%"></i><i style="--h:35%"></i><i style="--h:70%"></i><i style="--h:50%"></i><i style="--h:25%"></i></span><span class="ov"><b>Sound</b><span>28 original sounds</span></span></a>
   </div>
@@ -374,7 +428,26 @@ footer { padding-block: 64px calc(48px + env(safe-area-inset-bottom)); color: va
 
 <section id="vfx" data-cat="vfx" class="wrap">
   <p class="eyebrow">VFX</p>
-  <div class="row-head"><h2>Layered abilities</h2><div class="arrows" data-for="rail-vfx"><button aria-label="Previous">‹</button><button aria-label="Next">›</button></div></div>
+  <h2>Live VFX playground</h2>
+  <p class="lead">Eight abilities running live in your browser on a particle engine I wrote for this page. Pick one and click the arena to cast it. The sounds are my own SFX.</p>
+  <div class="playground">
+    <div class="pg-stage">
+      <canvas role="img" aria-label="VFX arena. Choose an ability below, then click the arena to cast it."></canvas>
+      <span class="pg-hint">Demo playing · click to take over</span>
+      <button class="pg-sound" type="button" aria-pressed="true">Sound on</button>
+    </div>
+    <div class="pg-picks" aria-label="Abilities">
+      <button type="button" data-fx="storm" style="--c:#7fd8ff">Storm strike</button>
+      <button type="button" data-fx="inferno" style="--c:#ff9a3c">Inferno blast</button>
+      <button type="button" data-fx="portal" style="--c:#b48cff">Void portal</button>
+      <button type="button" data-fx="dash" style="--c:#5af0ff">Blade dash</button>
+      <button type="button" data-fx="slam" style="--c:#d8b48c">Ground slam</button>
+      <button type="button" data-fx="frost" style="--c:#bfefff">Frost nova</button>
+      <button type="button" data-fx="beam" style="--c:#78f0ff">Charge beam</button>
+      <button type="button" data-fx="heal" style="--c:#7dffa8">Healing aura</button>
+    </div>
+  </div>
+  <div class="row-head"><h2>Layered abilities in Roblox Studio</h2><div class="arrows" data-for="rail-vfx"><button aria-label="Previous">‹</button><button aria-label="Next">›</button></div></div>
   <p class="lead">Each ability is one function in a ShowcaseVFX module that layers flipbook particles, beams, light and debris. Every texture comes from a noise-based generator, so any effect can be re-timed or recoloured.</p>
   <div class="rail" id="rail-vfx">
     <button class="card" data-src="site/img/vfx_storm.jpg" data-title="Storm strike" data-sub="Forked bolts · glow pass · shock ring · sparks"><span class="media"><img loading="lazy" src="site/img/vfx_storm.jpg" alt="Forked lightning strike"></span><span class="cap"><b>Storm strike</b><span>Forked bolts · glow pass · shock ring · sparks</span></span></button>
@@ -758,7 +831,7 @@ document.querySelectorAll('.arrows').forEach(box => {
     const tick = (t) => {
       const p = Math.min(1, Math.max(0, (t - t0) / dur));
       b.textContent = Math.round(end * (1 - (1 - p) ** 3));
-      if (p < 1) requestAnimationFrame(tick);
+      if (p < 1) requestAnimationFrame(tick); else b.classList.add('done');
     };
     b.textContent = '0'; requestAnimationFrame(tick);
   }
@@ -786,6 +859,48 @@ document.querySelectorAll('.arrows').forEach(box => {
   }
 })();
 
+/* ---------- html vfx: canvas helpers ---------- */
+const fitCanvas = (cv) => {
+  const dpr = Math.min(devicePixelRatio || 1, 2), r = cv.getBoundingClientRect();
+  cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+  const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); return { g, w: r.width, h: r.height };
+};
+
+/* ---------- hero: a few drifting embers that dodge the cursor ---------- */
+(() => {
+  const host = document.querySelector('.hero-fx'), cv = host.querySelector('canvas');
+  if (reduceMotion.matches) return;
+  let { g, w, h } = fitCanvas(cv), raf = 0, visible = true, last = performance.now();
+  const N = innerWidth < 700 ? 18 : 36, mouse = { x: -1e4, y: -1e4 };
+  const spawn = (p = {}, init) => Object.assign(p, {
+    x: Math.random() * w, y: init ? Math.random() * h : h + 10, r: 0.6 + Math.random() * 1.8,
+    vx: (Math.random() - 0.5) * 8, vy: -(8 + Math.random() * 22), tw: Math.random() * 6.28,
+    hue: Math.random() < 0.7 ? '90,240,255' : '185,168,255' });
+  const P = Array.from({ length: N }, () => spawn({}, true));
+  const frame = (t) => {
+    const dt = Math.min((t - last) / 1000, 0.05); last = t;
+    g.clearRect(0, 0, w, h); g.globalCompositeOperation = 'lighter';
+    for (const p of P) {
+      const dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
+      if (d2 < 120 * 120) { const f = (1 - Math.sqrt(d2) / 120) * 140; p.vx += dx / Math.sqrt(d2 + 1) * f * dt; p.vy += dy / Math.sqrt(d2 + 1) * f * dt; }
+      p.vx *= 0.985; p.x += p.vx * dt; p.y += p.vy * dt; p.tw += dt * 3;
+      if (p.y < -10 || p.x < -20 || p.x > w + 20) spawn(p);
+      const a = 0.22 + 0.2 * Math.sin(p.tw), R = p.r * 4;
+      const grd = g.createRadialGradient(p.x, p.y, 0, p.x, p.y, R);
+      grd.addColorStop(0, `rgba(${p.hue},${a})`); grd.addColorStop(1, `rgba(${p.hue},0)`);
+      g.fillStyle = grd; g.fillRect(p.x - R, p.y - R, R * 2, R * 2);
+    }
+    g.globalCompositeOperation = 'source-over';
+    raf = visible && !document.hidden ? requestAnimationFrame(frame) : 0;
+  };
+  const start = () => { if (!raf && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; start(); }).observe(host);   // sleep when scrolled away
+  document.addEventListener('visibilitychange', start);
+  addEventListener('resize', () => { ({ g, w, h } = fitCanvas(cv)); });
+  addEventListener('pointermove', (e) => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; }, { passive: true });
+  start();
+})();
+
 /* ---------- copy Discord handle ---------- */
 (() => {
   const b = document.getElementById('copy-discord'), hint = b.querySelector('span');
@@ -797,5 +912,6 @@ document.querySelectorAll('.arrows').forEach(box => {
   });
 })();
 </script>
+<script src="site/vfx-live.js" defer></script>
 </body>
 </html>
